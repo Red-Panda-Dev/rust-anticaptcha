@@ -1,0 +1,6 @@
+indent_style = "Block"
+reorder_imports = true
+verbose = "Verbose"
+brace_style = "PreferSameLine"
+chain_width = 65
+color = "Always"
