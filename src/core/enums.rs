@@ -13,3 +13,33 @@ impl TaskType {
         }
     }
 }
+
+pub enum ControlEnpPostfix {
+    // get account info
+    getBalance,
+    getQueueStats,
+    getAppStats,
+    getSpendingStats,
+    // reports
+    reportIncorrectImageCaptcha,
+    reportIncorrectRecaptcha,
+    reportCorrectRecaptcha,
+    reportIncorrectHcaptcha,
+}
+
+impl ControlEnpPostfix {
+    pub fn value_as_string(&self) -> String {
+        match &self {
+            ControlEnpPostfix::getBalance => "getBalance".to_string(),
+            ControlEnpPostfix::getQueueStats => "getQueueStats".to_string(),
+            ControlEnpPostfix::getAppStats => "getAppStats".to_string(),
+            ControlEnpPostfix::getSpendingStats => "getSpendingStats".to_string(),
+            ControlEnpPostfix::reportIncorrectImageCaptcha => {
+                "reportIncorrectImageCaptcha".to_string()
+            }
+            ControlEnpPostfix::reportIncorrectRecaptcha => "reportIncorrectRecaptcha".to_string(),
+            ControlEnpPostfix::reportCorrectRecaptcha => "reportCorrectRecaptcha".to_string(),
+            ControlEnpPostfix::reportIncorrectHcaptcha => "reportIncorrectHcaptcha".to_string(),
+        }
+    }
+}
