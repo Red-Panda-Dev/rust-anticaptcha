@@ -1,6 +1,11 @@
 mod core;
-use core::enums;
-use core::structs;
+
+use crate::core::enums::TaskType;
+use core::client::Client;
+use std::collections::HashMap;
+use std::string::ToString;
+
+const API_KEY: &str = "999999999999999999999999999";
 
 #[tokio::main]
 async fn main() -> Result<(), reqwest::Error> {
@@ -9,10 +14,17 @@ async fn main() -> Result<(), reqwest::Error> {
     let response = client.get("https://www.rust-lang.org").send().await?;
     println!("status code is = {}", response.status());
 
-    let new_task_payload = structs::TaskPayload {
-        r#type: enums::TaskType::RecaptchaV2Task,
-    };
+    let mut captcha_client = Client::new(7, API_KEY.to_string());
 
-    println!("Task payload - {}", new_task_payload.repr());
+    let mut captcha_params: HashMap<String, String> = HashMap::new();
+    captcha_params.insert(
+        "websiteURL".to_string(),
+        "https://docs.rs/reqwest/0.12.11/reqwest/".to_string(),
+    );
+    captcha_params.insert("websiteKey".to_string(), "3htd36tpbin543".to_string());
+    captcha_params.insert("recaptchaDataSValue".to_string(), "".to_string());
+    captcha_params.insert("isInvisible".to_string(), false.to_string());
+    captcha_client.solve_captcha(TaskType::RecaptchaV2TaskProxyless, captcha_params);
+
     Ok(())
 }
