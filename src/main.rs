@@ -1,9 +1,9 @@
+use std::collections::HashMap;
+
 mod core;
 
-use crate::core::enums::TaskType;
+use crate::core::enums::{ControlEnpPostfix, TaskType};
 use core::client::Client;
-use std::collections::HashMap;
-use std::string::ToString;
 
 const API_KEY: &str = "999999999999999999999999999";
 
@@ -25,6 +25,15 @@ async fn main() -> Result<(), reqwest::Error> {
     captcha_params.insert("recaptchaDataSValue".to_string(), "".to_string());
     captcha_params.insert("isInvisible".to_string(), false.to_string());
     captcha_client.solve_captcha(TaskType::RecaptchaV2TaskProxyless, captcha_params);
+
+    let mut map: HashMap<String, String> = HashMap::new();
+    map.insert("clientKey".to_string(), API_KEY.to_string());
+
+    let post_result = captcha_client
+        .send_post_request(&map, &ControlEnpPostfix::getBalance)
+        .await;
+
+    println!("{}", post_result);
 
     Ok(())
 }
