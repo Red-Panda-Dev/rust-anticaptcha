@@ -1,5 +1,6 @@
 use std::collections::HashMap;
 
+mod control;
 mod core;
 
 use crate::core::enums::{ControlEnpPostfix, TaskType};
@@ -14,7 +15,7 @@ async fn main() -> Result<(), reqwest::Error> {
     let response = client.get("https://www.rust-lang.org").send().await?;
     println!("status code is = {}", response.status());
 
-    let mut captcha_client = Client::new(7, API_KEY.to_string());
+    let mut captcha_client = Client::new(API_KEY.to_string());
 
     let mut captcha_params: HashMap<String, String> = HashMap::new();
     captcha_params.insert(
