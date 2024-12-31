@@ -1,28 +1,30 @@
-use std::collections::HashMap;
-
-use crate::core::enums::TaskType;
+use crate::core::constants::BASE_REQUEST_URL;
+use crate::core::enums::{ControlEnpPostfix, TaskType};
 use crate::core::structs::CreateTaskRequest;
+use std::collections::HashMap;
 
 pub struct Client {
     pub sleep_time: u8,
     pub api_key: String,
 
-    pub callbackUrl: Option<String>,
+    pub callbackUrl: String,
 
     task_payload: HashMap<String, String>,
+    request_client: reqwest::Client,
 }
 impl Client {
     pub fn new(sleep_time: u8, api_key: String) -> Self {
         Client {
             sleep_time,
             api_key,
-            callbackUrl: Some(String::new()),
+            callbackUrl: String::new(),
             task_payload: HashMap::new(),
+            request_client: reqwest::Client::new(),
         }
     }
     pub fn set_callback_url(&mut self, callbackUrl: &str) {
         // method set new callback URL for client
-        self.callbackUrl = Some(callbackUrl.to_string());
+        self.callbackUrl = callbackUrl.to_string();
     }
 
     pub fn solve_captcha(
@@ -47,6 +49,32 @@ impl Client {
             self.task_payload.clone(),
             self.callbackUrl.clone(),
         );
+        println!("{}", create_task_payload.into_json())
+    }
+
+    pub async fn send_post_request(
+        &self,
+        payload: &HashMap<String, String>,
+        enp_postfix: &ControlEnpPostfix,
+    ) -> serde_json::Value {
+        let req_url = BASE_REQUEST_URL.to_string() + &enp_postfix.value_as_string();
+
+        let response = self
+            .request_client
+            .post(req_url)
+            .json(payload)
+            .send()
+            .await
+            .unwrap();
+
+        if response.status() != 200 {
+            panic!(
+                "Invalid request to API, response - {}",
+                response.text().await.unwrap()
+            )
+        } else {
+            response.json().await.unwrap()
+        }
     }
 
     fn get_task_result(&self, captcha_type: &str) {}
