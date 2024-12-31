@@ -4,24 +4,29 @@ use crate::core::structs::CreateTaskRequest;
 use std::collections::HashMap;
 
 pub struct Client {
-    pub sleep_time: u8,
     pub api_key: String,
 
-    pub callbackUrl: String,
+    callbackUrl: String,
+    sleep_time: u8,
 
     task_payload: HashMap<String, String>,
     request_client: reqwest::Client,
 }
 impl Client {
-    pub fn new(sleep_time: u8, api_key: String) -> Self {
+    pub fn new(api_key: String) -> Self {
         Client {
-            sleep_time,
             api_key,
+            sleep_time: 10,
             callbackUrl: String::new(),
             task_payload: HashMap::new(),
             request_client: reqwest::Client::new(),
         }
     }
+    pub fn set_sleep_time(&mut self, sleep_time: u8) {
+        // method set new sleep time for client
+        self.sleep_time = sleep_time;
+    }
+
     pub fn set_callback_url(&mut self, callbackUrl: &str) {
         // method set new callback URL for client
         self.callbackUrl = callbackUrl.to_string();
