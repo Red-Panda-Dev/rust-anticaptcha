@@ -1,12 +1,27 @@
 use std::collections::HashMap;
 
+use crate::core::constants::SOFT_ID;
 use crate::core::enums::TaskType;
 
 pub struct CreateTaskRequest {
     clientKey: String,
-    task: HashMap<String, (String, u32)>,
-    softId: u8,
+    task: HashMap<String, String>,
+    softId: String,
     callbackUrl: Option<String>,
+}
+impl CreateTaskRequest {
+    pub fn new(
+        clientKey: String,
+        task: HashMap<String, String>,
+        callbackUrl: Option<String>,
+    ) -> Self {
+        CreateTaskRequest {
+            clientKey,
+            task,
+            softId: SOFT_ID.to_string(),
+            callbackUrl,
+        }
+    }
 }
 
 pub struct CreateTaskResponse {
