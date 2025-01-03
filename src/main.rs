@@ -3,7 +3,7 @@ use std::collections::HashMap;
 mod control;
 mod core;
 
-use crate::control::Control;
+use control::Control;
 
 const API_KEY: &str = "999999999999999999999999999";
 
