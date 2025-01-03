@@ -1,7 +1,6 @@
 use std::collections::HashMap;
 
-use crate::core::constants::BASE_REQUEST_URL;
-use crate::core::enums::{ControlEnpPostfix, TaskType};
+use crate::core::enums::TaskType;
 use crate::core::request_interface::RequestInterface;
 use crate::core::structs::CreateTaskRequest;
 
