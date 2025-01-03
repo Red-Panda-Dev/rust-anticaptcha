@@ -26,8 +26,6 @@ pub enum ControlEnpPostfix {
     reportCorrectRecaptcha,
     reportIncorrectHcaptcha,
     pushAntiGateVariable,
-    // additional
-    test,
 }
 
 impl ControlEnpPostfix {
@@ -44,7 +42,6 @@ impl ControlEnpPostfix {
             ControlEnpPostfix::reportCorrectRecaptcha => "reportCorrectRecaptcha".to_string(),
             ControlEnpPostfix::reportIncorrectHcaptcha => "reportIncorrectHcaptcha".to_string(),
             ControlEnpPostfix::pushAntiGateVariable => "pushAntiGateVariable".to_string(),
-            ControlEnpPostfix::test => "test".to_string(),
         }
     }
 }
