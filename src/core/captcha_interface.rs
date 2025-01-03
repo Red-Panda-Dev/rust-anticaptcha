@@ -2,25 +2,26 @@ use std::collections::HashMap;
 
 use crate::core::constants::BASE_REQUEST_URL;
 use crate::core::enums::{ControlEnpPostfix, TaskType};
+use crate::core::request_interface::RequestInterface;
 use crate::core::structs::CreateTaskRequest;
 
-pub struct Client {
+pub struct CaptchaInterface {
     pub api_key: String,
 
     callbackUrl: String,
     sleep_time: u8,
 
     task_payload: HashMap<String, String>,
-    request_client: reqwest::Client,
+    request_interface: RequestInterface,
 }
-impl Client {
+impl CaptchaInterface {
     pub fn new(api_key: String) -> Self {
-        Client {
+        CaptchaInterface {
             api_key,
             sleep_time: 10,
             callbackUrl: String::new(),
             task_payload: HashMap::new(),
-            request_client: reqwest::Client::new(),
+            request_interface: RequestInterface::new(),
         }
     }
     pub fn set_sleep_time(&mut self, sleep_time: u8) {
@@ -56,31 +57,6 @@ impl Client {
             self.callbackUrl.clone(),
         );
         println!("{}", create_task_payload.into_json())
-    }
-
-    pub async fn send_post_request(
-        &self,
-        payload: &HashMap<String, String>,
-        enp_postfix: &ControlEnpPostfix,
-    ) -> serde_json::Value {
-        let req_url = BASE_REQUEST_URL.to_string() + &enp_postfix.value_as_string();
-
-        let response = self
-            .request_client
-            .post(req_url)
-            .json(payload)
-            .send()
-            .await
-            .unwrap();
-
-        if response.status() != 200 {
-            panic!(
-                "Invalid request to API, response - {}",
-                response.text().await.unwrap()
-            )
-        } else {
-            response.json().await.unwrap()
-        }
     }
 
     fn get_task_result(&self, captcha_type: &str) {}
