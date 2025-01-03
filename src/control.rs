@@ -1,7 +1,7 @@
+use std::collections::HashMap;
+
 use crate::core::enums::ControlEnpPostfix;
 use crate::core::request_interface::RequestInterface;
-use crate::API_KEY;
-use std::collections::HashMap;
 
 pub struct Control {
     request_interface: RequestInterface,
