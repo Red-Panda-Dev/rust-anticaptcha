@@ -1,7 +1,7 @@
 use std::collections::HashMap;
 
-use crate::core::enums::ControlEnpPostfix;
-use crate::core::request_interface::RequestInterface;
+use super::core::enums::ControlEnpPostfix;
+use super::core::request_interface::RequestInterface;
 
 pub struct Control {
     request_interface: RequestInterface,
