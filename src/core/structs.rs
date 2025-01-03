@@ -3,8 +3,8 @@ use std::collections::HashMap;
 use serde::{Deserialize, Serialize};
 use serde_json;
 
-use crate::core::constants::SOFT_ID;
-use crate::core::enums::TaskType;
+use super::constants::SOFT_ID;
+use super::enums::TaskType;
 
 #[derive(Serialize, Deserialize)]
 pub struct CreateTaskRequest {
