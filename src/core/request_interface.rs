@@ -1,7 +1,7 @@
 use std::collections::HashMap;
 
-use crate::core::constants::BASE_REQUEST_URL;
-use crate::core::enums::ControlEnpPostfix;
+use super::constants::BASE_REQUEST_URL;
+use super::enums::ControlEnpPostfix;
 
 pub struct RequestInterface {
     task_payload: HashMap<String, String>,
