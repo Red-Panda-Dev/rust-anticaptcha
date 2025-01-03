@@ -1,8 +1,9 @@
-use std::collections::HashMap;
-
-use super::enums::TaskType;
+use super::enums::{EnpPostfix, TaskType};
 use super::request_interface::RequestInterface;
 use super::structs::CreateTaskRequest;
+use std::collections::HashMap;
+use std::thread::sleep;
+use std::time::Duration;
 
 pub struct CaptchaInterface {
     pub api_key: String,
@@ -36,16 +37,20 @@ impl CaptchaInterface {
     pub fn solve_captcha(
         &mut self,
         captcha_type: TaskType,
-        captcha_params: HashMap<String, String>,
+        captcha_properties: HashMap<String, String>,
     ) {
         // method starts processing captcha
 
         // fill task payload with params
-        self.task_payload = captcha_params;
+        self.task_payload = captcha_properties;
         self.task_payload
             .insert("type".to_string(), captcha_type.value_as_string());
 
         self.create_task();
+
+        sleep(Duration::from_secs(self.sleep_time as u64));
+
+        self.get_task_result();
     }
     fn create_task(&self) {
         // method create task for captcha processing
@@ -55,8 +60,10 @@ impl CaptchaInterface {
             self.task_payload.clone(),
             self.callbackUrl.clone(),
         );
-        println!("{}", create_task_payload.into_json())
+
+        self.request_interface
+            .send_create_task_request(&create_task_payload, &EnpPostfix::createTask);
     }
 
-    fn get_task_result(&self, captcha_type: &str) {}
+    fn get_task_result(&self) {}
 }
