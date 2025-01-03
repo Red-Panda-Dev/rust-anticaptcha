@@ -1,8 +1,8 @@
 use std::collections::HashMap;
 
-use crate::core::enums::TaskType;
-use crate::core::request_interface::RequestInterface;
-use crate::core::structs::CreateTaskRequest;
+use super::enums::TaskType;
+use super::request_interface::RequestInterface;
+use super::structs::CreateTaskRequest;
 
 pub struct CaptchaInterface {
     pub api_key: String,
