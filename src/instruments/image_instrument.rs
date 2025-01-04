@@ -1,6 +1,5 @@
 use std::fs;
 use std::io::ErrorKind;
-use std::io::Read;
 
 use base64::alphabet::STANDARD;
 use base64::engine::general_purpose;
