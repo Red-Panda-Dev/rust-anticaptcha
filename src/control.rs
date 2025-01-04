@@ -68,11 +68,14 @@ impl Control {
         if result.status().eq(&200) {
             result.json().await.unwrap()
         } else {
-            panic!(format!(
-                "Invalid request to API, status code - {} response - {}",
-                result.status(),
-                result.text().await.unwrap()
-            ))
+            panic!(
+                "{}",
+                format!(
+                    "Invalid request to API, status code - {} response - {}",
+                    result.status(),
+                    result.text().await.unwrap()
+                )
+            )
         }
     }
 
