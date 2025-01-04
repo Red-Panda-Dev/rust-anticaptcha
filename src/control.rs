@@ -105,7 +105,7 @@ impl Control {
     ///
     /// ```
     /// let control_client = Control::new();
-    /// let mut map: HashMap<String, String> = HashMap::new();
+    /// let mut map = HashMap::new();
     /// map.insert("queueId".to_string(), 6.to_string());
     /// let result: Value = control_client.get_queue_stats(&map).await;
     /// ```
@@ -125,7 +125,7 @@ impl Control {
     ///
     /// ```
     /// let control_client = Control::new();
-    /// let mut map: HashMap<String, String> = HashMap::new();
+    /// let mut map = HashMap::new();
     /// map.insert("clientKey".to_string(), API_KEY.to_string());
     /// map.insert("taskId".to_string(), 12345.to_string());
     /// let result: Value = control_client.report_incorrect_image(&map).await;
@@ -146,7 +146,7 @@ impl Control {
     ///
     /// ```
     /// let control_client = Control::new();
-    /// let mut map: HashMap<String, String> = HashMap::new();
+    /// let mut map = HashMap::new();
     /// map.insert("clientKey".to_string(), API_KEY.to_string());
     /// map.insert("taskId".to_string(), 12345.to_string());
     /// let result: Value = control_client.report_incorrect_recaptcha(&map).await;
@@ -167,7 +167,7 @@ impl Control {
     ///
     /// ```
     /// let control_client = Control::new();
-    /// let mut map: HashMap<String, String> = HashMap::new();
+    /// let mut map = HashMap::new();
     /// map.insert("clientKey".to_string(), API_KEY.to_string());
     /// map.insert("taskId".to_string(), 12345.to_string());
     /// let result: Value = control_client.report_correct_recaptcha(&map).await;
@@ -188,7 +188,7 @@ impl Control {
     ///
     /// ```
     /// let control_client = Control::new();
-    /// let mut map: HashMap<String, String> = HashMap::new();
+    /// let mut map = HashMap::new();
     /// map.insert("clientKey".to_string(), API_KEY.to_string());
     /// map.insert("taskId".to_string(), 12345.to_string());
     /// let result: Value = control_client.report_incorrect_hcaptcha(&map).await;
@@ -209,7 +209,7 @@ impl Control {
     ///
     /// ```
     /// let control_client = Control::new();
-    /// let mut map: HashMap<String, String> = HashMap::new();
+    /// let mut map = HashMap::new();
     /// map.insert("clientKey".to_string(), API_KEY.to_string());
     /// map.insert("taskId".to_string(), 12345.to_string());
     /// map.insert("name".to_string(), "my_late_variable".to_string());
@@ -232,7 +232,7 @@ impl Control {
     ///
     /// ```
     /// let control_client = Control::new();
-    /// let mut map: HashMap<String, String> = HashMap::new();
+    /// let mut map = HashMap::new();
     /// map.insert("clientKey".to_string(), API_KEY.to_string());
     /// map.insert("date".to_string(), 1672185600.to_string());
     /// map.insert("queue".to_string(), "Recaptcha Proxyless".to_string());
@@ -257,7 +257,7 @@ impl Control {
     ///
     /// ```
     /// let control_client = Control::new();
-    /// let mut map: HashMap<String, String> = HashMap::new();
+    /// let mut map = HashMap::new();
     /// map.insert("clientKey".to_string(), API_KEY.to_string());
     /// map.insert("softId".to_string(), 867.to_string());
     /// map.insert("mode".to_string(), "money".to_string());
