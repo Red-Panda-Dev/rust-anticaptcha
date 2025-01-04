@@ -1,7 +1,20 @@
-pub enum TaskType {
+pub trait TaskTypeTrait {
+    fn value_as_string(&self) -> String;
+}
+
+pub enum ImageTaskType {
     ImageToTextTask,
     ImageToCoordinatesTask,
-
+}
+impl TaskTypeTrait for ImageTaskType {
+    fn value_as_string(&self) -> String {
+        match &self {
+            ImageTaskType::ImageToTextTask => "ImageToTextTask".to_string(),
+            ImageTaskType::ImageToCoordinatesTask => "ImageToCoordinatesTask".to_string(),
+        }
+    }
+}
+pub enum TokenTaskType {
     RecaptchaV2Task,
     RecaptchaV2TaskProxyless,
 
@@ -23,26 +36,24 @@ pub enum TaskType {
     AntiGateTask,
 }
 
-impl TaskType {
-    pub fn value_as_string(&self) -> String {
+impl TaskTypeTrait for TokenTaskType {
+    fn value_as_string(&self) -> String {
         match &self {
-            TaskType::ImageToTextTask => "ImageToTextTask".to_string(),
-            TaskType::ImageToCoordinatesTask => "ImageToCoordinatesTask".to_string(),
-            TaskType::RecaptchaV2Task => "RecaptchaV2Task".to_string(),
-            TaskType::RecaptchaV2TaskProxyless => "RecaptchaV2TaskProxyless".to_string(),
-            TaskType::RecaptchaV3Enterprise => "RecaptchaV3Enterprise".to_string(),
-            TaskType::RecaptchaV3TaskProxyless => "RecaptchaV3TaskProxyless".to_string(),
-            TaskType::RecaptchaV2EnterpriseTask => "RecaptchaV2EnterpriseTask".to_string(),
-            TaskType::RecaptchaV2EnterpriseTaskProxyless => {
+            TokenTaskType::RecaptchaV2Task => "RecaptchaV2Task".to_string(),
+            TokenTaskType::RecaptchaV2TaskProxyless => "RecaptchaV2TaskProxyless".to_string(),
+            TokenTaskType::RecaptchaV3Enterprise => "RecaptchaV3Enterprise".to_string(),
+            TokenTaskType::RecaptchaV3TaskProxyless => "RecaptchaV3TaskProxyless".to_string(),
+            TokenTaskType::RecaptchaV2EnterpriseTask => "RecaptchaV2EnterpriseTask".to_string(),
+            TokenTaskType::RecaptchaV2EnterpriseTaskProxyless => {
                 "RecaptchaV2EnterpriseTaskProxyless".to_string()
             }
-            TaskType::FunCaptchaTask => "FunCaptchaTask".to_string(),
-            TaskType::FunCaptchaTaskProxyless => "FunCaptchaTaskProxyless".to_string(),
-            TaskType::GeeTestTask => "GeeTestTask".to_string(),
-            TaskType::GeeTestTaskProxyless => "GeeTestTaskProxyless".to_string(),
-            TaskType::TurnstileTask => "TurnstileTask".to_string(),
-            TaskType::TurnstileTaskProxyless => "TurnstileTaskProxyless".to_string(),
-            TaskType::AntiGateTask => "AntiGateTask".to_string(),
+            TokenTaskType::FunCaptchaTask => "FunCaptchaTask".to_string(),
+            TokenTaskType::FunCaptchaTaskProxyless => "FunCaptchaTaskProxyless".to_string(),
+            TokenTaskType::GeeTestTask => "GeeTestTask".to_string(),
+            TokenTaskType::GeeTestTaskProxyless => "GeeTestTaskProxyless".to_string(),
+            TokenTaskType::TurnstileTask => "TurnstileTask".to_string(),
+            TokenTaskType::TurnstileTaskProxyless => "TurnstileTaskProxyless".to_string(),
+            TokenTaskType::AntiGateTask => "AntiGateTask".to_string(),
         }
     }
 }
