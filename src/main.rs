@@ -2,8 +2,9 @@ use std::collections::HashMap;
 
 mod control;
 mod core;
-mod image_to_text;
 mod instruments;
+mod image_to_text;
+
 use crate::image_to_text::ImageToText;
 use crate::instruments::image_instrument::ImageInstrument;
 use control::Control;
