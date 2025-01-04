@@ -23,13 +23,12 @@ pub struct ImageToText {
 }
 impl ImageToText {
     pub fn new(api_key: String) -> Self {
-        /// Method init new Control struct with Web Requests Client
+        /// Method init new ImageToText struct with Captcha Interface
         ///
         /// # Examples
         ///
         /// ```
         /// let image_to_text_client = ImageToText::new(API_KEY);
-        /// image_to_text_client.captcha_handler();
         /// ```
         ImageToText {
             captcha_interface: CaptchaInterface::new(api_key),
@@ -37,7 +36,18 @@ impl ImageToText {
     }
 
     pub async fn captcha_handler(&mut self, task_payload: &HashMap<String, String>) {
+        /// Method run captcha solving logic
+        ///
+        /// # Examples
+        ///
+        /// ```
+        /// let mut map: HashMap<String, String> = HashMap::new();
+        /// map.insert("body".to_string(), image_file_base64);
+        /// let image_to_text_client = ImageToText::new(API_KEY);
+        /// let result = image_to_text_client.captcha_handler();
+        /// ```
         self.captcha_interface
-            .solve_captcha(TaskType::ImageToTextTask, task_payload.clone());
+            .solve_captcha(TaskType::ImageToTextTask, task_payload.clone())
+            .await;
     }
 }
