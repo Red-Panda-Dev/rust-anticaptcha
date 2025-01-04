@@ -59,7 +59,7 @@ impl RequestInterface {
 
         let response = self
             .request_client
-            .post(req_url)
+            .post(&req_url)
             .json(payload)
             .send()
             .await
@@ -85,7 +85,7 @@ impl RequestInterface {
 
         let response = self
             .request_client
-            .post(req_url)
+            .post(&req_url)
             .json(payload)
             .send()
             .await
