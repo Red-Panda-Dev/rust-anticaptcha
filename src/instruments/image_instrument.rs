@@ -63,10 +63,10 @@ impl ImageInstrument {
         self.engine.encode(contents)
     }
 
-    /// Method read image file and return base64 string
+    /// Method read image file from link and return base64 string
     ///
     /// # Arguments
-    /// `file_path` - path to image on local system
+    /// `file_url` - image URL
     ///
     /// # Examples
     ///
