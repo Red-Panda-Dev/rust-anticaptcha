@@ -1,5 +1,6 @@
 use std::collections::HashMap;
 
+use reqwest::Response;
 use serde_json::Value;
 
 use super::constants::BASE_REQUEST_URL;
@@ -15,6 +16,19 @@ impl RequestInterface {
         RequestInterface {
             task_payload: HashMap::new(),
             request_client: reqwest::Client::new(),
+        }
+    }
+    pub async fn send_get_request(&self, url: &String) -> Result<Response, String> {
+        let response = self.request_client.get(url).send().await.unwrap();
+
+        if response.status() != 200 {
+            Err(format!(
+                "Invalid request to API, status code - {} response - {}",
+                response.status(),
+                response.text().await.unwrap()
+            ))
+        } else {
+            Ok(response)
         }
     }
     pub async fn send_post_request(
