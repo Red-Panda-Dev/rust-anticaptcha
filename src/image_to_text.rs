@@ -35,7 +35,10 @@ impl ImageToText {
         }
     }
 
-    pub async fn captcha_handler(&mut self, task_payload: &HashMap<String, String>) {
+    pub async fn captcha_handler(
+        &mut self,
+        task_payload: &HashMap<String, String>,
+    ) -> serde_json::Value {
         /// Method run captcha solving logic
         ///
         /// # Examples
@@ -48,6 +51,6 @@ impl ImageToText {
         /// ```
         self.captcha_interface
             .solve_captcha(TaskType::ImageToTextTask, task_payload.clone())
-            .await;
+            .await
     }
 }
