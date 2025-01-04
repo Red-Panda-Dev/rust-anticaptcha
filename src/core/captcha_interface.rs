@@ -1,18 +1,21 @@
-use serde_json::Value;
 use std::collections::HashMap;
 use std::time::Duration;
-use tokio::time::sleep;
 
 use super::enums::{EnpPostfix, GetResultStatus, TaskType};
 use super::request_interface::RequestInterface;
 use super::structs::{CreateTaskRequest, ResultTaskRequest};
+use crate::image_to_text::ImageToText;
+use crate::API_KEY;
+use serde_json::{json, Value};
+use tokio::time::sleep;
 
 pub struct CaptchaInterface {
-    pub api_key: String,
+    pub api_key: String, // service API key
 
-    callbackUrl: String,
-    sleep_time: u8,
-    max_attempts: u8,
+    callbackUrl: String, // optional web address where we can send the results of
+    // captcha task processing
+    sleep_time: u8,   // sleep time between requests for task result receive
+    max_attempts: u8, // number of max retries for task result receive
 
     task_payload: HashMap<String, String>,
     request_interface: RequestInterface,
@@ -21,7 +24,7 @@ impl CaptchaInterface {
     pub fn new(api_key: String) -> Self {
         CaptchaInterface {
             api_key,
-            sleep_time: 10,
+            sleep_time: 5,
             max_attempts: 5,
             callbackUrl: String::new(),
             task_payload: HashMap::new(),
@@ -46,7 +49,7 @@ impl CaptchaInterface {
         &mut self,
         captcha_type: TaskType,
         captcha_properties: HashMap<String, String>,
-    ) {
+    ) -> Value {
         // method starts processing captcha
 
         // fill task payload with params
@@ -54,38 +57,55 @@ impl CaptchaInterface {
         self.task_payload
             .insert("type".to_string(), captcha_type.value_as_string());
 
-        let task_id = self.create_task().await;
+        let task_id = match self.create_task().await {
+            Ok(task_id) => task_id,
+            Err(error_response) => return error_response,
+        };
 
         sleep(Duration::from_secs(self.sleep_time as u64)).await;
 
-        self.get_task_result(&task_id).await;
+        self.get_task_result(&task_id).await
     }
-    async fn create_task(&self) -> String {
+    async fn create_task(&self) -> Result<String, Value> {
         /// Method create task for captcha processing
+        /// If task not created - return server response JSON value
         let create_task_payload = CreateTaskRequest::new(
             self.api_key.clone(),
             self.task_payload.clone(),
             self.callbackUrl.clone(),
         );
-
         let task_result = self
             .request_interface
             .send_create_task_request(&create_task_payload, &EnpPostfix::createTask)
-            .await;
+            .await
+            .unwrap_or_else(|error| {
+                json!({
+                    "errorId": 1.to_string(),
+                    "errorDescription": error
+                })
+            });
 
         if task_result["errorId"] == 0 {
-            println!(
-                "Task success created! Task id is - {}",
-                task_result["taskId"]
-            );
-            task_result["taskId"].to_string()
+            Ok(task_result["taskId"].to_string())
         } else {
-            panic!("Task is not created, error response body - {task_result}")
+            Err(task_result)
         }
     }
 
     async fn get_task_result(&self, task_id: &String) -> Value {
         /// Method wait and get task result
+        ///
+        /// # Examples
+        ///
+        /// ```
+        /// self.get_task_result(&task_id).await
+        /// ```
+        ///
+        /// # Notes
+        /// Read more here:
+        ///
+        /// https://anti-captcha.com/apidoc/methods/getTaskResult
+        ///
         let mut attempt: u8 = 0;
 
         let get_result_payload = ResultTaskRequest {
@@ -95,22 +115,26 @@ impl CaptchaInterface {
 
         loop {
             attempt += 1;
+
             let task_result = self
                 .request_interface
                 .send_get_result_request(&get_result_payload, &EnpPostfix::getTaskResult)
-                .await;
+                .await
+                .unwrap_or_else(|error| {
+                    json!({
+                        "errorId": 1.to_string(),
+                        "taskId": task_id.to_string(),
+                        "errorDescription": error
+                    })
+                });
 
             println!("Task creation result - {:?}", task_result);
 
             if task_result["errorId"] == 0 {
-                println!("Task is correct processing - {}", task_result);
                 if task_result["status"] == GetResultStatus::ready.value_as_string() {
-                    println!("Task is finished - {}", task_result);
                     return task_result;
                 }
-                println!("Captcha is not ready ...");
             } else {
-                println!("Task is not created, error response body - {task_result}");
                 return task_result;
             }
 
@@ -118,7 +142,6 @@ impl CaptchaInterface {
                 return task_result;
             }
 
-            println!("Sleeeeeping");
             sleep(Duration::from_secs(self.sleep_time as u64)).await;
         }
     }
