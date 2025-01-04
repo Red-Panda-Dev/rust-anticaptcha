@@ -1,5 +1,7 @@
 use std::collections::HashMap;
 
+use serde_json::Value;
+
 use super::constants::BASE_REQUEST_URL;
 use super::enums::EnpPostfix;
 use super::structs::{CreateTaskRequest, ResultTaskRequest};
@@ -19,7 +21,7 @@ impl RequestInterface {
         &self,
         payload: &HashMap<String, String>,
         enp_postfix: &EnpPostfix,
-    ) -> serde_json::Value {
+    ) -> Value {
         let req_url = BASE_REQUEST_URL.to_string() + &enp_postfix.value_as_string();
 
         let response = self
@@ -43,7 +45,7 @@ impl RequestInterface {
         &self,
         payload: &CreateTaskRequest,
         enp_postfix: &EnpPostfix,
-    ) -> serde_json::Value {
+    ) -> Result<Value, String> {
         let req_url = BASE_REQUEST_URL.to_string() + &enp_postfix.value_as_string();
 
         let response = self
@@ -55,19 +57,20 @@ impl RequestInterface {
             .unwrap();
 
         if response.status() != 200 {
-            panic!(
-                "Invalid request to API, response - {}",
+            Err(format!(
+                "Invalid request to API, status code - {} response - {}",
+                response.status(),
                 response.text().await.unwrap()
-            )
+            ))
         } else {
-            response.json().await.unwrap()
+            Ok(response.json().await.unwrap())
         }
     }
     pub async fn send_get_result_request(
         &self,
         payload: &ResultTaskRequest,
         enp_postfix: &EnpPostfix,
-    ) -> serde_json::Value {
+    ) -> Result<Value, String> {
         let req_url = BASE_REQUEST_URL.to_string() + &enp_postfix.value_as_string();
 
         let response = self
@@ -79,12 +82,13 @@ impl RequestInterface {
             .unwrap();
 
         if response.status() != 200 {
-            panic!(
-                "Invalid request to API, response - {}",
+            Err(format!(
+                "Invalid request to API, status code - {} response - {}",
+                response.status(),
                 response.text().await.unwrap()
-            )
+            ))
         } else {
-            response.json().await.unwrap()
+            Ok(response.json().await.unwrap())
         }
     }
 }
