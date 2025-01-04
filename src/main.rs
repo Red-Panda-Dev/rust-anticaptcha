@@ -4,8 +4,6 @@ mod control;
 mod core;
 mod image_to_text;
 
-use crate::core::captcha_interface::CaptchaInterface;
-use crate::core::image_instrument;
 use crate::core::image_instrument::ImageInstrument;
 use crate::image_to_text::ImageToText;
 use control::Control;
@@ -27,14 +25,15 @@ async fn main() -> Result<(), reqwest::Error> {
     println!("Your balance - {:?}", control_result);
 
     let image_instrument = ImageInstrument::new();
-    let image_file_base64 = image_instrument.read_image_file("files/captcha-image.jpg".to_string());
+    let image_file_base64 =
+        image_instrument.read_image_file("files/captcha-image-coordinates.jpg".to_string());
 
     let mut image_to_text_client = ImageToText::new(API_KEY.to_string());
 
     let mut map: HashMap<String, String> = HashMap::new();
     map.insert("body".to_string(), image_file_base64);
-    image_to_text_client.captcha_handler(&map).await;
-    //println!("Image to text - {:?}", image_to_text_result);
+    let image_to_text_result = image_to_text_client.captcha_handler(&map).await;
+    println!("Image to text - {:?}", image_to_text_result);
 
     Ok(())
 }
