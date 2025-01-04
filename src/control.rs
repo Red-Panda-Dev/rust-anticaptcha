@@ -206,7 +206,7 @@ impl Control {
         /// map.insert("clientKey".to_string(), API_KEY.to_string());
         /// map.insert("date".to_string(), 1672185600.to_string());
         /// map.insert("queue".to_string(), "Recaptcha Proxyless".to_string());
-        /// let result: serde_json::Value = control_client.push_antigate_var(&map).await;
+        /// let result: serde_json::Value = control_client.get_spending_stats(&map).await;
         /// ```
         ///
         /// # Notes
