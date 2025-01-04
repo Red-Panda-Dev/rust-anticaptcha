@@ -12,11 +12,11 @@
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/7f49780f2edb48d4b133833887c850e8)](https://www.codacy.com/gh/AndreiDrang/python3-anticaptcha/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=AndreiDrang/python3-anticaptcha&amp;utm_campaign=Badge_Grade)
 [![codecov](https://codecov.io/gh/AndreiDrang/python3-anticaptcha/branch/main/graph/badge.svg?token=W92nfZY6Tz)](https://codecov.io/gh/AndreiDrang/python3-anticaptcha)
 
-[![Sphinx docs](https://github.com/AndreiDrang/python3-anticaptcha/actions/workflows/sphinx.yml/badge.svg?branch=release)](https://github.com/AndreiDrang/python3-anticaptcha/actions/workflows/sphinx.yml)
-[![Building](https://github.com/AndreiDrang/python3-anticaptcha/actions/workflows/build.yml/badge.svg)](https://github.com/AndreiDrang/python3-anticaptcha/actions/workflows/build.yml)
-[![Installation check](https://github.com/AndreiDrang/python3-anticaptcha/actions/workflows/install.yml/badge.svg?branch=main)](https://github.com/AndreiDrang/python3-anticaptcha/actions/workflows/install.yml)
-[![Test](https://github.com/AndreiDrang/python3-anticaptcha/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/AndreiDrang/python3-anticaptcha/actions/workflows/test.yml)
-[![Lint](https://github.com/AndreiDrang/python3-anticaptcha/actions/workflows/lint.yml/badge.svg?branch=main)](https://github.com/AndreiDrang/python3-anticaptcha/actions/workflows/lint.yml)
+[![Build Doc](https://github.com/Red-Panda-Dev/rust-anticaptcha/actions/workflows/build_doc.yml/badge.svg?branch=master)](https://github.com/Red-Panda-Dev/rust-anticaptcha/actions/workflows/build_doc.yml)
+[![Build Dev](https://github.com/Red-Panda-Dev/rust-anticaptcha/actions/workflows/build_dev.yml/badge.svg?branch=master)](https://github.com/Red-Panda-Dev/rust-anticaptcha/actions/workflows/build_dev.yml)
+[![Build Release](https://github.com/Red-Panda-Dev/rust-anticaptcha/actions/workflows/build_release.yml/badge.svg?branch=master)](https://github.com/Red-Panda-Dev/rust-anticaptcha/actions/workflows/build_release.yml)
+
+
 
 
 Rust library for [AntiCaptcha](https://getcaptchasolution.com/vchfpctqyz) service API.
