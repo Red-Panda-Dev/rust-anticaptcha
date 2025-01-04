@@ -30,57 +30,59 @@ impl CaptchaInterface {
             request_interface: RequestInterface::new(),
         }
     }
+
+    /// Method set new sleep time for client
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// let mut image_to_text_client = ImageToText::new(API_KEY);
+    /// image_to_text_client.captcha_interface.set_sleep_time(3);
+    /// ```
+    ///
     pub fn set_sleep_time(&mut self, sleep_time: u8) {
-        /// Method set new sleep time for client
-        ///
-        /// # Examples
-        ///
-        /// ```
-        /// let mut image_to_text_client = ImageToText::new(API_KEY);
-        /// image_to_text_client.captcha_interface.set_sleep_time(3);
-        /// ```
-        ///
         self.sleep_time = sleep_time;
     }
+
+    /// Method set new max_attempts for client
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// let mut image_to_text_client = ImageToText::new(API_KEY);
+    /// image_to_text_client.captcha_interface.set_max_attempts(9);
+    /// ```
+    ///
     pub fn set_max_attempts(&mut self, max_attempts: u8) {
-        /// Method set new max_attempts for client
-        ///
-        /// # Examples
-        ///
-        /// ```
-        /// let mut image_to_text_client = ImageToText::new(API_KEY);
-        /// image_to_text_client.captcha_interface.set_max_attempts(9);
-        /// ```
-        ///
         self.max_attempts = max_attempts;
     }
 
+    /// Method set new callback URL for client
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// let mut image_to_text_client = ImageToText::new(API_KEY);
+    /// image_to_text_client.captcha_interface.set_callback_url("some-url".to_string());
+    /// ```
+    ///
     pub fn set_callback_url(&mut self, callbackUrl: &str) {
-        /// Method set new callback URL for client
-        ///
-        /// # Examples
-        ///
-        /// ```
-        /// let mut image_to_text_client = ImageToText::new(API_KEY);
-        /// image_to_text_client.captcha_interface.set_callback_url("some-url".to_string());
-        /// ```
-        ///
         self.callbackUrl = callbackUrl.to_string();
     }
 
+    /// Method starts processing captcha
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// self.captcha_interface.solve_captcha(TaskType::ImageToTextTask, task_payload.clone()).await
+    /// ```
+    ///
     pub async fn solve_captcha(
         &mut self,
         captcha_type: TaskType,
         captcha_properties: HashMap<String, String>,
     ) -> Value {
-        /// Method starts processing captcha
-        ///
-        /// # Examples
-        ///
-        /// ```
-        /// self.captcha_interface.solve_captcha(TaskType::ImageToTextTask, task_payload.clone()).await
-        /// ```
-        ///
         // fill task payload with params
         self.task_payload = captcha_properties;
         self.task_payload
@@ -95,21 +97,22 @@ impl CaptchaInterface {
 
         self.get_task_result(&task_id).await
     }
+
+    /// Method create task for captcha processing
+    /// If task not created - return server response JSON value
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// self.create_task().await.unwrap()
+    /// ```
+    ///
+    /// # Notes
+    /// Read more here:
+    ///
+    /// <https://anti-captcha.com/apidoc/methods/createTask>
+    ///
     async fn create_task(&self) -> Result<String, Value> {
-        /// Method create task for captcha processing
-        /// If task not created - return server response JSON value
-        ///
-        /// # Examples
-        ///
-        /// ```
-        /// self.create_task().await.unwrap()
-        /// ```
-        ///
-        /// # Notes
-        /// Read more here:
-        ///
-        /// https://anti-captcha.com/apidoc/methods/createTask
-        ///
         let create_task_payload = CreateTaskRequest::new(
             self.api_key.clone(),
             self.task_payload.clone(),
@@ -133,20 +136,20 @@ impl CaptchaInterface {
         }
     }
 
+    /// Method wait and get task result
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// self.get_task_result(&task_id).await
+    /// ```
+    ///
+    /// # Notes
+    /// Read more here:
+    ///
+    /// <https://anti-captcha.com/apidoc/methods/getTaskResult>
+    ///
     async fn get_task_result(&self, task_id: &String) -> Value {
-        /// Method wait and get task result
-        ///
-        /// # Examples
-        ///
-        /// ```
-        /// self.get_task_result(&task_id).await
-        /// ```
-        ///
-        /// # Notes
-        /// Read more here:
-        ///
-        /// https://anti-captcha.com/apidoc/methods/getTaskResult
-        ///
         let mut attempt: u8 = 0;
 
         let get_result_payload = ResultTaskRequest {
