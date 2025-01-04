@@ -21,38 +21,33 @@ impl RequestInterface {
     pub async fn send_get_request(&self, url: &String) -> Result<Response, String> {
         let response = self.request_client.get(url).send().await.unwrap();
 
-        if response.status() != 200 {
+        if response.status().eq(&200) {
+            Ok(response)
+        } else {
             Err(format!(
-                "Invalid request to API, status code - {} response - {}",
+                "Invalid request to {}, status code - {} response - {}",
+                url,
                 response.status(),
                 response.text().await.unwrap()
             ))
-        } else {
-            Ok(response)
         }
     }
     pub async fn send_post_request(
         &self,
         payload: &HashMap<String, String>,
-        enp_postfix: &EnpPostfix,
-    ) -> Value {
-        let req_url = BASE_REQUEST_URL.to_string() + &enp_postfix.value_as_string();
+        url: &String,
+    ) -> Result<Response, String> {
+        let response = self.request_client.post(url).json(payload).send().await.unwrap();
 
-        let response = self
-            .request_client
-            .post(req_url)
-            .json(payload)
-            .send()
-            .await
-            .unwrap();
-
-        if response.status() != 200 {
-            panic!(
-                "Invalid request to API, response - {}",
-                response.text().await.unwrap()
-            )
+        if response.status().eq(&200) {
+            Ok(response)
         } else {
-            response.json().await.unwrap()
+            Err(format!(
+                "Invalid request  to {}, status code - {} response - {}",
+                url,
+                response.status(),
+                response.text().await.unwrap()
+            ))
         }
     }
     pub async fn send_create_task_request(
@@ -70,14 +65,15 @@ impl RequestInterface {
             .await
             .unwrap();
 
-        if response.status() != 200 {
+        if response.status().eq(&200) {
+            Ok(response.json().await.unwrap())
+        } else {
             Err(format!(
-                "Invalid request to API, status code - {} response - {}",
+                "Invalid request to {}, status code - {} response - {}",
+                req_url,
                 response.status(),
                 response.text().await.unwrap()
             ))
-        } else {
-            Ok(response.json().await.unwrap())
         }
     }
     pub async fn send_get_result_request(
@@ -95,14 +91,15 @@ impl RequestInterface {
             .await
             .unwrap();
 
-        if response.status() != 200 {
+        if response.status().eq(&200) {
+            Ok(response.json().await.unwrap())
+        } else {
             Err(format!(
-                "Invalid request to API, status code - {} response - {}",
+                "Invalid request to {}, status code - {} response - {}",
+                req_url,
                 response.status(),
                 response.text().await.unwrap()
             ))
-        } else {
-            Ok(response.json().await.unwrap())
         }
     }
 }
