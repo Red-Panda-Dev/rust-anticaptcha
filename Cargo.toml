@@ -1,7 +1,14 @@
 [package]
 name = "rust-anticaptcha"
+description = "Rust library for AntiCaptcha service API."
 version = "0.0.1"
 edition = "2021"
+authors = ["Red-Panda-Dev <python-captcha@pm.me>"]
+keywords = ["captcha", "anticaptcha", "recaptcha", "funcaptcha", "geetest"]
+license = "MIT OR Mozilla Public License 2.0 (MPL 2.0)"
+repository = "https://github.com/Red-Panda-Dev/rust-anticaptcha"
+homepage = "https://github.com/Red-Panda-Dev/rust-anticaptcha"
+documentation = "https://github.com/Red-Panda-Dev/rust-anticaptcha"
 
 [dependencies]
 reqwest = { version = "0.12.11", features = ["json"] }
@@ -9,3 +16,8 @@ tokio = { version = "1.21.2", features = ["full"] }
 serde = { version = "1.0.217", features = ["derive"] }
 base64 = "0.22.1"
 serde_json = "1.0.134"
+
+[lib]
+name = "rust-anticaptcha"
+path = "src/lib.rs"
+crate-type = ["lib"]
