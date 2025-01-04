@@ -1,5 +1,6 @@
-pub mod captcha_interface;
-mod constants;
-pub mod enums;
-pub mod request_interface;
 mod structs;
+mod constants;
+
+pub mod enums;
+pub mod captcha_interface;
+pub mod request_interface;
