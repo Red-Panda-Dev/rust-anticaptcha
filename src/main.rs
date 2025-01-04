@@ -3,9 +3,9 @@ use std::collections::HashMap;
 mod control;
 mod core;
 mod image_to_text;
-
-use crate::core::image_instrument::ImageInstrument;
+mod instruments;
 use crate::image_to_text::ImageToText;
+use crate::instruments::image_instrument::ImageInstrument;
 use control::Control;
 
 const API_KEY: &str = "999999999999999999999999999";
