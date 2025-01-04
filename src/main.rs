@@ -29,6 +29,7 @@ async fn main() -> Result<(), reqwest::Error> {
         image_instrument.read_image_file("files/captcha-image-coordinates.jpg".to_string());
 
     let mut image_to_text_client = ImageToText::new(API_KEY.to_string());
+    image_to_text_client.captcha_interface.set_sleep_time(3);
 
     let mut map: HashMap<String, String> = HashMap::new();
     map.insert("body".to_string(), image_file_base64);
