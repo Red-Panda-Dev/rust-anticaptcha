@@ -9,6 +9,7 @@ license = "MIT OR Mozilla Public License 2.0 (MPL 2.0)"
 repository = "https://github.com/Red-Panda-Dev/rust-anticaptcha"
 homepage = "https://github.com/Red-Panda-Dev/rust-anticaptcha"
 documentation = "https://github.com/Red-Panda-Dev/rust-anticaptcha"
+rust-version = "1.83"
 
 [dependencies]
 reqwest = { version = "0.12.11", features = ["json"] }
