@@ -2,4 +2,5 @@ mod core;
 
 pub mod control;
 pub mod instruments;
-pub mod image_to_text;
+pub mod image_captcha;
+pub mod token_captcha;
