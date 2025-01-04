@@ -4,3 +4,5 @@ verbose = "Verbose"
 brace_style = "PreferSameLine"
 chain_width = 65
 color = "Always"
+reorder_modules = false
+group_imports = "StdExternalCrate"
