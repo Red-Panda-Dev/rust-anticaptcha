@@ -2,6 +2,7 @@ use std::collections::HashMap;
 
 use serde_json::Value;
 
+use super::core::constants::BASE_REQUEST_URL;
 use super::core::enums::EnpPostfix;
 use super::core::request_interface::RequestInterface;
 
@@ -35,6 +36,46 @@ impl Control {
         }
     }
 
+    /// Method prepare and send control request to API
+    ///
+    /// # Arguments
+    /// `payload` - request JSON payload
+    /// `enp_postfix` - API URL postfix from `EnpPostfix`
+    ///
+    /// # Examples
+    ///
+    /// ```
+    ///let mut map = HashMap::new();
+    /// map.insert("clientKey".to_string(), api_key);
+    /// self.send_control_request(&map, &EnpPostfix::getBalance).await
+    /// ```
+    ///
+    /// # Returns
+    /// Method return API response JSON
+    ///
+    async fn send_control_request(
+        &self,
+        payload: &HashMap<String, String>,
+        enp_postfix: &EnpPostfix,
+    ) -> Value {
+        let req_url = BASE_REQUEST_URL.to_string() + &enp_postfix.value_as_string();
+        let result = self
+            .request_interface
+            .send_post_request(&payload, &req_url)
+            .await
+            .unwrap();
+
+        if result.status().eq(&200) {
+            result.json().await.unwrap()
+        } else {
+            panic!(format!(
+                "Invalid request to API, status code - {} response - {}",
+                result.status(),
+                result.text().await.unwrap()
+            ))
+        }
+    }
+
     /// Method request `getBalance` enp
     ///
     /// # Examples
@@ -52,9 +93,7 @@ impl Control {
         let mut map: HashMap<String, String> = HashMap::new();
         map.insert("clientKey".to_string(), api_key);
 
-        self.request_interface
-            .send_post_request(&map, &EnpPostfix::getBalance)
-            .await
+        self.send_control_request(&map, &EnpPostfix::getBalance).await
     }
 
     /// Method request `getQueueStats ` enp
@@ -73,8 +112,7 @@ impl Control {
     ///
     /// <https://anti-captcha.com/apidoc/methods/getQueueStats>
     pub async fn get_queue_stats(&self, enp_payload: &HashMap<String, String>) -> Value {
-        self.request_interface
-            .send_post_request(&enp_payload, &EnpPostfix::getQueueStats)
+        self.send_control_request(&enp_payload, &EnpPostfix::getQueueStats)
             .await
     }
 
@@ -95,8 +133,7 @@ impl Control {
     ///
     /// <https://anti-captcha.com/apidoc/methods/reportIncorrectImageCaptcha>
     pub async fn report_incorrect_image(&self, enp_payload: &HashMap<String, String>) -> Value {
-        self.request_interface
-            .send_post_request(&enp_payload, &EnpPostfix::reportIncorrectImageCaptcha)
+        self.send_control_request(&enp_payload, &EnpPostfix::reportIncorrectImageCaptcha)
             .await
     }
 
@@ -117,8 +154,7 @@ impl Control {
     ///
     /// <https://anti-captcha.com/apidoc/methods/reportIncorrectRecaptcha>
     pub async fn report_incorrect_recaptcha(&self, enp_payload: &HashMap<String, String>) -> Value {
-        self.request_interface
-            .send_post_request(&enp_payload, &EnpPostfix::reportIncorrectRecaptcha)
+        self.send_control_request(&enp_payload, &EnpPostfix::reportIncorrectRecaptcha)
             .await
     }
 
@@ -139,8 +175,7 @@ impl Control {
     ///
     /// <https://anti-captcha.com/apidoc/methods/reportCorrectRecaptcha>
     pub async fn report_correct_recaptcha(&self, enp_payload: &HashMap<String, String>) -> Value {
-        self.request_interface
-            .send_post_request(&enp_payload, &EnpPostfix::reportCorrectRecaptcha)
+        self.send_control_request(&enp_payload, &EnpPostfix::reportCorrectRecaptcha)
             .await
     }
 
@@ -161,8 +196,7 @@ impl Control {
     ///
     /// <https://anti-captcha.com/apidoc/methods/reportIncorrectHcaptcha>
     pub async fn report_incorrect_hcaptcha(&self, enp_payload: &HashMap<String, String>) -> Value {
-        self.request_interface
-            .send_post_request(&enp_payload, &EnpPostfix::reportIncorrectHcaptcha)
+        self.send_control_request(&enp_payload, &EnpPostfix::reportIncorrectHcaptcha)
             .await
     }
 
@@ -185,8 +219,7 @@ impl Control {
     ///
     /// <https://anti-captcha.com/apidoc/methods/pushAntiGateVariable>
     pub async fn push_antigate_var(&self, enp_payload: &HashMap<String, String>) -> Value {
-        self.request_interface
-            .send_post_request(&enp_payload, &EnpPostfix::pushAntiGateVariable)
+        self.send_control_request(&enp_payload, &EnpPostfix::pushAntiGateVariable)
             .await
     }
 
@@ -211,8 +244,7 @@ impl Control {
     ///
     /// <https://anti-captcha.com/apidoc/methods/getSpendingStats>
     pub async fn get_spending_stats(&self, enp_payload: &HashMap<String, String>) -> Value {
-        self.request_interface
-            .send_post_request(&enp_payload, &EnpPostfix::getSpendingStats)
+        self.send_control_request(&enp_payload, &EnpPostfix::getSpendingStats)
             .await
     }
 
@@ -238,8 +270,7 @@ impl Control {
     ///
     /// <https://anti-captcha.com/apidoc/methods/getAppStats>
     pub async fn get_app_stats(&self, enp_payload: &HashMap<String, String>) -> Value {
-        self.request_interface
-            .send_post_request(&enp_payload, &EnpPostfix::getAppStats)
+        self.send_control_request(&enp_payload, &EnpPostfix::getAppStats)
             .await
     }
 }
