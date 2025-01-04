@@ -1,13 +1,12 @@
 use std::collections::HashMap;
 use std::time::Duration;
 
+use serde_json::{json, Value};
+use tokio::time::sleep;
+
 use super::enums::{EnpPostfix, GetResultStatus, TaskType};
 use super::request_interface::RequestInterface;
 use super::structs::{CreateTaskRequest, ResultTaskRequest};
-use crate::image_to_text::ImageToText;
-use crate::API_KEY;
-use serde_json::{json, Value};
-use tokio::time::sleep;
 
 pub struct CaptchaInterface {
     pub api_key: String, // service API key
@@ -24,7 +23,7 @@ impl CaptchaInterface {
     pub fn new(api_key: String) -> Self {
         CaptchaInterface {
             api_key,
-            sleep_time: 5,
+            sleep_time: 10,
             max_attempts: 5,
             callbackUrl: String::new(),
             task_payload: HashMap::new(),
@@ -32,16 +31,40 @@ impl CaptchaInterface {
         }
     }
     pub fn set_sleep_time(&mut self, sleep_time: u8) {
-        // method set new sleep time for client
+        /// Method set new sleep time for client
+        ///
+        /// # Examples
+        ///
+        /// ```
+        /// let mut image_to_text_client = ImageToText::new(API_KEY);
+        /// image_to_text_client.captcha_interface.set_sleep_time(3);
+        /// ```
+        ///
         self.sleep_time = sleep_time;
     }
     pub fn set_max_attempts(&mut self, max_attempts: u8) {
-        // method set new max_attempts for client
+        /// Method set new max_attempts for client
+        ///
+        /// # Examples
+        ///
+        /// ```
+        /// let mut image_to_text_client = ImageToText::new(API_KEY);
+        /// image_to_text_client.captcha_interface.set_max_attempts(9);
+        /// ```
+        ///
         self.max_attempts = max_attempts;
     }
 
     pub fn set_callback_url(&mut self, callbackUrl: &str) {
-        // method set new callback URL for client
+        /// Method set new callback URL for client
+        ///
+        /// # Examples
+        ///
+        /// ```
+        /// let mut image_to_text_client = ImageToText::new(API_KEY);
+        /// image_to_text_client.captcha_interface.set_callback_url("some-url".to_string());
+        /// ```
+        ///
         self.callbackUrl = callbackUrl.to_string();
     }
 
@@ -50,8 +73,14 @@ impl CaptchaInterface {
         captcha_type: TaskType,
         captcha_properties: HashMap<String, String>,
     ) -> Value {
-        // method starts processing captcha
-
+        /// Method starts processing captcha
+        ///
+        /// # Examples
+        ///
+        /// ```
+        /// self.captcha_interface.solve_captcha(TaskType::ImageToTextTask, task_payload.clone()).await
+        /// ```
+        ///
         // fill task payload with params
         self.task_payload = captcha_properties;
         self.task_payload
@@ -69,6 +98,18 @@ impl CaptchaInterface {
     async fn create_task(&self) -> Result<String, Value> {
         /// Method create task for captcha processing
         /// If task not created - return server response JSON value
+        ///
+        /// # Examples
+        ///
+        /// ```
+        /// self.create_task().await.unwrap()
+        /// ```
+        ///
+        /// # Notes
+        /// Read more here:
+        ///
+        /// https://anti-captcha.com/apidoc/methods/createTask
+        ///
         let create_task_payload = CreateTaskRequest::new(
             self.api_key.clone(),
             self.task_payload.clone(),
