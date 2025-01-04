@@ -25,6 +25,12 @@ impl CreateTaskRequest {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
+pub struct ResultTaskRequest {
+    pub clientKey: String,
+    pub taskId: String,
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct CreateTaskResponse {
     errorId: u16,
     errorCode: Option<String>,
