@@ -16,9 +16,6 @@
 [![Build Dev](https://github.com/Red-Panda-Dev/rust-anticaptcha/actions/workflows/build_dev.yml/badge.svg?branch=master)](https://github.com/Red-Panda-Dev/rust-anticaptcha/actions/workflows/build_dev.yml)
 [![Build Release](https://github.com/Red-Panda-Dev/rust-anticaptcha/actions/workflows/build_release.yml/badge.svg?branch=master)](https://github.com/Red-Panda-Dev/rust-anticaptcha/actions/workflows/build_release.yml)
 
-
-
-
 Rust library for [AntiCaptcha](https://getcaptchasolution.com/vchfpctqyz) service API.
 
 Tested on UNIX based OS.
@@ -34,3 +31,14 @@ Or email python-captcha@pm.me
 ## How to install?
 
 We recommend using the latest version of Rust. `rust-anticaptcha` supports Rust 2021.
+
+Install by Cargo command:
+```bash
+cargo add rust-anticaptcha
+```
+
+Add line in your `Cargo.toml` file:
+```toml
+rust-anticaptcha = "0.0.1"
+```
+
