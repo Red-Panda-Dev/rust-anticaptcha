@@ -2,9 +2,17 @@ name: Build Doc
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "master"]
+    paths:
+      - '.github/workflows/build_doc.yml'
+      - 'src/**'
+      - 'Cargo.toml'
   pull_request:
-    branches: [ "master" ]
+    branches: [ "master", "release"]
+    paths:
+      - '.github/workflows/build_doc.yml'
+      - 'src/**'
+      - 'Cargo.toml'
 
 env:
   CARGO_TERM_COLOR: always
