@@ -1,7 +1,7 @@
-use super::core::captcha_interface::CaptchaInterface;
-use super::core::enums::{EnpPostfix, TaskType};
-use super::core::request_interface::RequestInterface;
 use std::collections::HashMap;
+
+use super::core::captcha_interface::CaptchaInterface;
+use super::core::enums::TaskType;
 
 pub struct ImageToText {
     /// Captcha solving method - `ImageToTextTask `
