@@ -1,4 +1,4 @@
-pub mod structs;
+mod structs;
 
 pub mod enums;
 pub mod constants;
