@@ -7,31 +7,50 @@ use base64::engine::general_purpose;
 use base64::engine::Engine;
 use base64::engine::GeneralPurpose;
 
+/// Struct help in encoding image from file/url to base64 string
+///
+/// # Examples
+///
+/// ```
+/// let image_instrument = ImageInstrument::new();
+/// ```
 pub struct ImageInstrument {
     engine: GeneralPurpose,
 }
 impl ImageInstrument {
+    /// Method init new ImageInstrument struct with base64 engine
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// let image_instrument = ImageInstrument::new();
+    /// ```
+    ///
+    /// # Returns
+    /// Method return `ImageInstrument` instance
+    ///
     pub fn new() -> Self {
-        /// Method init new ImageInstrument struct with base64 engine
-        ///
-        /// # Examples
-        ///
-        /// ```
-        /// let image_instrument = ImageInstrument::new();
-        /// ```
         ImageInstrument {
             engine: GeneralPurpose::new(&STANDARD, general_purpose::PAD),
         }
     }
+
+    /// Method read image file and return base64 string
+    ///
+    /// # Arguments
+    /// `file_path` - path to image on local system
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// let image_instrument = ImageInstrument::new();
+    /// let base64_str = image_instrument.read_image_file("files/image.jpg".to_string());
+    /// ```
+    ///
+    /// # Returns
+    /// Method return image as base64 string
+    ///
     pub fn read_image_file(&self, file_path: String) -> String {
-        /// Method make able to read image file as base64 string
-        ///
-        /// # Examples
-        ///
-        /// ```
-        /// let image_instrument = ImageInstrument::new();
-        /// let base64_str = image_instrument.read_image_file("files/image.jpg".to_string());
-        /// ```
         let contents = match fs::read(&file_path) {
             Ok(content) => content,
             Err(error) => match error.kind() {
