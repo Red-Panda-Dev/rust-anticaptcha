@@ -19,7 +19,7 @@ pub struct ImageToText {
     /// Read more here:
     ///
     /// https://anti-captcha.com/apidoc/task-types/ImageToTextTask
-    captcha_interface: CaptchaInterface,
+    pub captcha_interface: CaptchaInterface,
 }
 impl ImageToText {
     pub fn new(api_key: String) -> Self {
