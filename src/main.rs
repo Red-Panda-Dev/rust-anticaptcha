@@ -26,16 +26,25 @@ async fn main() -> Result<(), reqwest::Error> {
     println!("Your balance - {:?}", control_result);
 
     let image_instrument = ImageInstrument::new();
-    let image_file_base64 =
-        image_instrument.read_image_file("files/captcha-image-coordinates.jpg".to_string());
+    let image_file_base64 = image_instrument.read_image_file("files/captcha-image.jpg".to_string());
 
     let mut image_to_text_client = ImageToText::new(API_KEY.to_string());
-    image_to_text_client.captcha_interface.set_sleep_time(3);
 
     let mut map: HashMap<String, String> = HashMap::new();
     map.insert("body".to_string(), image_file_base64);
     let image_to_text_result = image_to_text_client.captcha_handler(&map).await;
-    println!("Image to text - {:?}", image_to_text_result);
+    println!("Image file to text - {:?}", image_to_text_result);
+
+    let image_instrument = ImageInstrument::new();
+    let image_link_base64 =
+        image_instrument.read_image_link("https://raw.githubusercontent.com/AndreiDrang/python3-anticaptcha/refs/heads/main/files/captcha-image.jpg".to_string()).await;
+
+    let mut image_to_text_client = ImageToText::new(API_KEY.to_string());
+
+    let mut map: HashMap<String, String> = HashMap::new();
+    map.insert("body".to_string(), image_link_base64);
+    let image_to_text_result = image_to_text_client.captcha_handler(&map).await;
+    println!("Image link to text - {:?}", image_to_text_result);
 
     Ok(())
 }
