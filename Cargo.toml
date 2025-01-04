@@ -18,6 +18,6 @@ base64 = "0.22.1"
 serde_json = "1.0.134"
 
 [lib]
-name = "rust-anticaptcha"
+name = "rust_anticaptcha"
 path = "src/lib.rs"
 crate-type = ["lib"]
