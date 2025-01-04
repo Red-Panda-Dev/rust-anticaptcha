@@ -81,3 +81,19 @@ impl EnpPostfix {
         }
     }
 }
+
+pub enum GetResultStatus {
+    processing,
+    ready,
+    error,
+}
+
+impl GetResultStatus {
+    pub fn value_as_string(&self) -> String {
+        match &self {
+            GetResultStatus::processing => "processing".to_string(),
+            GetResultStatus::ready => "ready".to_string(),
+            GetResultStatus::error => "error".to_string(),
+        }
+    }
+}
