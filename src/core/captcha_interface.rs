@@ -1,10 +1,9 @@
-use std::collections::HashMap;
 use std::time::Duration;
 
 use serde_json::{json, Value};
 use tokio::time::sleep;
 
-use super::enums::{EnpPostfix, GetResultStatus, TaskType};
+use super::enums::{EnpPostfix, GetResultStatus, TaskTypeTrait};
 use super::request_interface::RequestInterface;
 use super::structs::{CreateTaskRequest, ResultTaskRequest};
 
@@ -16,7 +15,7 @@ pub struct CaptchaInterface {
     sleep_time: u8,   // sleep time between requests for task result receive
     max_attempts: u8, // number of max retries for task result receive
 
-    task_payload: HashMap<String, String>,
+    task_payload: Value,
     request_interface: RequestInterface,
 }
 impl CaptchaInterface {
@@ -26,7 +25,7 @@ impl CaptchaInterface {
             sleep_time: 10,
             max_attempts: 5,
             callbackUrl: String::new(),
-            task_payload: HashMap::new(),
+            task_payload: json!({}),
             request_interface: RequestInterface::new(),
         }
     }
@@ -36,7 +35,7 @@ impl CaptchaInterface {
     /// # Examples
     ///
     /// ```
-    /// let mut image_to_text_client = ImageToText::new(API_KEY);
+    /// let mut image_to_text_client = ImageCaptcha::new(API_KEY);
     /// image_to_text_client.captcha_interface.set_sleep_time(3);
     /// ```
     ///
@@ -49,7 +48,7 @@ impl CaptchaInterface {
     /// # Examples
     ///
     /// ```
-    /// let mut image_to_text_client = ImageToText::new(API_KEY);
+    /// let mut image_to_text_client = ImageCaptcha::new(API_KEY);
     /// image_to_text_client.captcha_interface.set_max_attempts(9);
     /// ```
     ///
@@ -62,7 +61,7 @@ impl CaptchaInterface {
     /// # Examples
     ///
     /// ```
-    /// let mut image_to_text_client = ImageToText::new(API_KEY);
+    /// let mut image_to_text_client = ImageCaptcha::new(API_KEY);
     /// image_to_text_client.captcha_interface.set_callback_url("some-url".to_string());
     /// ```
     ///
@@ -72,21 +71,24 @@ impl CaptchaInterface {
 
     /// Method starts processing captcha
     ///
+    /// # Arguments
+    /// `captcha_type` - One of image captcha types from `TaskTypeTrait`
+    /// `captcha_properties` - JSON with keys/values for `task` key in payload
+    ///
     /// # Examples
     ///
     /// ```
     /// self.captcha_interface.solve_captcha(TaskType::ImageToTextTask, task_payload.clone()).await
     /// ```
     ///
-    pub async fn solve_captcha(
+    pub async fn solve_captcha<CaptchaType: TaskTypeTrait>(
         &mut self,
-        captcha_type: TaskType,
-        captcha_properties: HashMap<String, String>,
+        captcha_type: CaptchaType,
+        captcha_properties: Value,
     ) -> Value {
         // fill task payload with params
         self.task_payload = captcha_properties;
-        self.task_payload
-            .insert("type".to_string(), captcha_type.value_as_string());
+        self.task_payload["type"] = Value::String(captcha_type.value_as_string());
 
         let task_id = match self.create_task().await {
             Ok(task_id) => task_id,
@@ -171,8 +173,6 @@ impl CaptchaInterface {
                         "errorDescription": error
                     })
                 });
-
-            println!("Task creation result - {:?}", task_result);
 
             if task_result["errorId"] == 0 {
                 if task_result["status"] == GetResultStatus::ready.value_as_string() {
