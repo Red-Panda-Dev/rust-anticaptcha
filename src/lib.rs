@@ -1,5 +1,4 @@
-mod core;
-
+pub mod core;
 pub mod control;
 pub mod instruments;
 pub mod image_captcha;
