@@ -13,6 +13,8 @@ on:
       - '.github/workflows/build_doc.yml'
       - 'src/**'
       - 'Cargo.toml'
+  schedule:
+    - cron: "5 0 * * 1"
 
 env:
   CARGO_TERM_COLOR: always
