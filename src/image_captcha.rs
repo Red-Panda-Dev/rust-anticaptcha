@@ -1,3 +1,22 @@
+//! # ImageCaptcha module
+//!
+//! Module contains struct and functions to solve Image captcha,
+//! like `ImageToTextTask` and `ImageToCoordinatesTask`
+//!
+//! ## Examples
+//! ```no_run
+//! use serde_json::json;
+//!
+//! use rust_anticaptcha::core::enums::ImageTaskType;
+//! use rust_anticaptcha::image_captcha::ImageCaptcha;
+//!
+//! async fn run() {
+//!      let map = json!({"body": "base64_string"});
+//!      let mut image_to_text_client = ImageCaptcha::new("API_KEY".to_string());
+//!      image_to_text_client.captcha_handler(ImageTaskType::ImageToTextTask, &map).await;
+//! }
+//! ```
+
 use serde_json::Value;
 
 use super::core::captcha_interface::CaptchaInterface;
