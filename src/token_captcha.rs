@@ -8,14 +8,21 @@ use super::core::enums::TokenTaskType;
 /// # Examples
 /// For `RecaptchaV2TaskProxyless`.
 /// Other captcha types works same, you need check docs and set correct `task_payload`.
-/// ```
-/// let map = json!({
-///         "websiteKey": "6LfD3PIbAAAAAJs_eEHvoOl75_83eXSqpPSRFJ_u",
-///         "websiteURL":"https://rucaptcha.com/demo/recaptcha-v2"
-///     });
+/// ```no_run
+/// use serde_json::json;
 ///
-/// let image_to_text_client = TokenCaptcha::new(API_KEY);
-/// let result = image_to_text_client.captcha_handler(TokenTaskType::RecaptchaV2TaskProxyless, map);
+/// use rust_anticaptcha::core::enums::TokenTaskType;
+/// use rust_anticaptcha::token_captcha::TokenCaptcha;
+///
+/// async fn run() {
+///     let map = json!({
+///             "websiteKey": "6LfD3PIbAAAAAJs_eEHvoOl75_83eXSqpPSRFJ_u",
+///             "websiteURL":"https://rucaptcha.com/demo/recaptcha-v2"
+///         });
+///
+///     let mut image_to_text_client = TokenCaptcha::new("API_KEY".to_string());
+///     image_to_text_client.captcha_handler(TokenTaskType::RecaptchaV2TaskProxyless, map).await;
+/// }
 /// ```
 ///
 /// # Notes
@@ -42,7 +49,9 @@ impl TokenCaptcha {
     /// # Examples
     ///
     /// ```
-    /// let image_to_text_client = TokenCaptcha::new(API_KEY);
+    /// use rust_anticaptcha::token_captcha::TokenCaptcha;
+    ///
+    /// let image_to_text_client = TokenCaptcha::new("API_KEY".to_string());
     /// ```
     /// # Returns
     /// Method return new `TokenCaptcha` instance
@@ -61,11 +70,21 @@ impl TokenCaptcha {
     ///
     /// # Examples
     ///
-    /// ```
-    /// let map = json!({"body": base64_string});
+    /// ```no_run
+    /// use serde_json::json;
     ///
-    /// let image_to_text_client = TokenCaptcha::new(API_KEY);
-    /// let result = image_to_text_client.captcha_handler(map);
+    /// use rust_anticaptcha::core::enums::TokenTaskType;
+    /// use rust_anticaptcha::token_captcha::TokenCaptcha;
+    ///
+    /// async fn run() {
+    ///     let map = json!({
+    ///             "websiteKey": "6LfD3PIbAAAAAJs_eEHvoOl75_83eXSqpPSRFJ_u",
+    ///             "websiteURL":"https://rucaptcha.com/demo/recaptcha-v2"
+    ///         });
+    ///
+    ///     let mut image_to_text_client = TokenCaptcha::new("API_KEY".to_string());
+    ///     image_to_text_client.captcha_handler(TokenTaskType::RecaptchaV2TaskProxyless, map).await;
+    /// }
     /// ```
     pub async fn captcha_handler(
         &mut self,
