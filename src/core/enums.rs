@@ -11,7 +11,7 @@ pub enum ImageTaskType {
 }
 impl TaskTypeTrait for ImageTaskType {
     fn as_string(&self) -> String {
-        format!("{}", &self)
+        format!("{:?}", &self)
     }
 }
 
@@ -39,7 +39,7 @@ pub enum TokenTaskType {
 }
 impl TaskTypeTrait for TokenTaskType {
     fn as_string(&self) -> String {
-        format!("{}", &self)
+        format!("{:?}", &self)
     }
 }
 
