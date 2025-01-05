@@ -1,5 +1,3 @@
-use std::collections::HashMap;
-
 use reqwest::Response;
 use serde_json::Value;
 
@@ -32,7 +30,7 @@ impl RequestInterface {
     }
     pub async fn send_post_request(
         &self,
-        payload: &HashMap<String, String>,
+        payload: &Value,
         url: &String,
     ) -> Result<Response, String> {
         let response = self.request_client.post(url).json(payload).send().await.unwrap();
