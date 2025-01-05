@@ -1,3 +1,26 @@
+//! # TokenCaptcha module
+//!
+//! Module contains struct and functions to solve Token captcha,
+//! like `ReCaptchaV2`, `ReCaptchaV3`, `FunCaptcha`, `GeeTest`, `Turnstile`.
+//!
+//! ## Examples
+//! ```no_run
+//! use serde_json::json;
+//!
+//! use rust_anticaptcha::core::enums::TokenTaskType;
+//! use rust_anticaptcha::token_captcha::TokenCaptcha;
+//!
+//! async fn run() {
+//!     let map = json!({
+//!                 "websiteKey": "6LfD3PIbAAAAAJs_eEHvoOl75_83eXSqpPSRFJ_u",
+//!                 "websiteURL":"https://rucaptcha.com/demo/recaptcha-v2"
+//!                 });
+//!
+//!     let mut image_to_text_client = TokenCaptcha::new("API_KEY".to_string());
+//!     image_to_text_client.captcha_handler(TokenTaskType::RecaptchaV2TaskProxyless, &map).await;
+//! }
+//! ```
+
 use serde_json::Value;
 
 use super::core::captcha_interface::CaptchaInterface;
