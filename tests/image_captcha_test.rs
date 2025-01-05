@@ -1,12 +1,9 @@
 use rust_anticaptcha::image_captcha::ImageCaptcha;
 use rust_anticaptcha::instruments::image_instrument::ImageInstrument;
-use serde::de::Unexpected::Str;
-use serde_json::Value::String;
-use std::any::{Any, TypeId};
 
 use crate::structs::ImageCaptchaArgs;
 
-pub mod structs;
+mod structs;
 
 struct ImageToTextTests {
     image_captcha_args: ImageCaptchaArgs,
