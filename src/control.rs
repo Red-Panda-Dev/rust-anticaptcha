@@ -11,6 +11,8 @@ use super::core::request_interface::RequestInterface;
 /// # Examples
 ///
 /// ```
+/// use rust_anticaptcha::control::Control;
+///
 /// let control_client = Control::new();
 /// ```
 ///
@@ -28,6 +30,8 @@ impl Control {
     /// # Examples
     ///
     /// ```
+    /// use rust_anticaptcha::control::Control;
+    ///
     /// let control_client = Control::new();
     /// ```
     pub fn new() -> Self {
@@ -41,14 +45,6 @@ impl Control {
     /// # Arguments
     /// `payload` - request JSON payload
     /// `enp_postfix` - API URL postfix from `EnpPostfix`
-    ///
-    /// # Examples
-    ///
-    /// ```
-    ///let mut map = HashMap::new();
-    /// map.insert("clientKey".to_string(), api_key);
-    /// self.send_control_request(&map, &EnpPostfix::getBalance).await
-    /// ```
     ///
     /// # Returns
     /// Method return API response JSON
@@ -83,9 +79,13 @@ impl Control {
     ///
     /// # Examples
     ///
-    /// ```
-    /// let control_client = Control::new();
-    /// let result: Value = control_client.get_balance().await;
+    /// ```no_run
+    /// use rust_anticaptcha::control::Control;
+    ///
+    /// async fn run() {
+    ///     let control_client = Control::new();
+    ///     control_client.get_balance("API_KEY".to_string()).await;
+    /// }
     /// ```
     ///
     /// # Notes
@@ -103,11 +103,17 @@ impl Control {
     ///
     /// # Examples
     ///
-    /// ```
-    /// let control_client = Control::new();
-    /// let mut map = HashMap::new();
-    /// map.insert("queueId".to_string(), 6.to_string());
-    /// let result: Value = control_client.get_queue_stats(&map).await;
+    /// ```no_run
+    /// use std::collections::HashMap;
+    ///
+    /// use rust_anticaptcha::control::Control;
+    ///
+    /// async fn run() {
+    ///     let control_client = Control::new();
+    ///     let mut map = HashMap::new();
+    ///     map.insert("queueId".to_string(), 6.to_string());
+    ///     let result = control_client.get_queue_stats(&map).await;
+    /// }
     /// ```
     ///
     /// # Notes
@@ -123,12 +129,18 @@ impl Control {
     ///
     /// # Examples
     ///
-    /// ```
-    /// let control_client = Control::new();
-    /// let mut map = HashMap::new();
-    /// map.insert("clientKey".to_string(), API_KEY.to_string());
-    /// map.insert("taskId".to_string(), 12345.to_string());
-    /// let result: Value = control_client.report_incorrect_image(&map).await;
+    /// ```no_run
+    /// use std::collections::HashMap;
+    ///
+    /// use rust_anticaptcha::control::Control;
+    ///
+    /// async fn run() {
+    ///     let control_client = Control::new();
+    ///     let mut map = HashMap::new();
+    ///     map.insert("clientKey".to_string(), "API_KEY".to_string());
+    ///     map.insert("taskId".to_string(), 12345.to_string());
+    ///     let result = control_client.report_incorrect_image(&map).await;
+    /// }
     /// ```
     ///
     /// # Notes
@@ -144,12 +156,18 @@ impl Control {
     ///
     /// # Examples
     ///
-    /// ```
-    /// let control_client = Control::new();
-    /// let mut map = HashMap::new();
-    /// map.insert("clientKey".to_string(), API_KEY.to_string());
-    /// map.insert("taskId".to_string(), 12345.to_string());
-    /// let result: Value = control_client.report_incorrect_recaptcha(&map).await;
+    /// ```no_run
+    /// use std::collections::HashMap;
+    ///
+    /// use rust_anticaptcha::control::Control;
+    ///
+    /// async fn run() {
+    ///     let control_client = Control::new();
+    ///     let mut map = HashMap::new();
+    ///     map.insert("clientKey".to_string(), "API_KEY".to_string());
+    ///     map.insert("taskId".to_string(), 12345.to_string());
+    ///     let result = control_client.report_incorrect_recaptcha(&map).await;
+    /// }
     /// ```
     ///
     /// # Notes
@@ -165,12 +183,18 @@ impl Control {
     ///
     /// # Examples
     ///
-    /// ```
-    /// let control_client = Control::new();
-    /// let mut map = HashMap::new();
-    /// map.insert("clientKey".to_string(), API_KEY.to_string());
-    /// map.insert("taskId".to_string(), 12345.to_string());
-    /// let result: Value = control_client.report_correct_recaptcha(&map).await;
+    /// ```no_run
+    /// use std::collections::HashMap;
+    ///
+    /// use rust_anticaptcha::control::Control;
+    ///
+    /// async fn run() {
+    ///     let control_client = Control::new();
+    ///     let mut map = HashMap::new();
+    ///     map.insert("clientKey".to_string(), "API_KEY".to_string());
+    ///     map.insert("taskId".to_string(), 12345.to_string());
+    ///     control_client.report_correct_recaptcha(&map).await;
+    /// }
     /// ```
     ///
     /// # Notes
@@ -186,12 +210,18 @@ impl Control {
     ///
     /// # Examples
     ///
-    /// ```
-    /// let control_client = Control::new();
-    /// let mut map = HashMap::new();
-    /// map.insert("clientKey".to_string(), API_KEY.to_string());
-    /// map.insert("taskId".to_string(), 12345.to_string());
-    /// let result: Value = control_client.report_incorrect_hcaptcha(&map).await;
+    /// ```no_run
+    /// use std::collections::HashMap;
+    ///
+    /// use rust_anticaptcha::control::Control;
+    ///
+    /// async fn run() {
+    ///     let control_client = Control::new();
+    ///     let mut map = HashMap::new();
+    ///     map.insert("clientKey".to_string(), "API_KEY".to_string());
+    ///     map.insert("taskId".to_string(), 12345.to_string());
+    ///     control_client.report_incorrect_hcaptcha(&map).await;
+    /// };
     /// ```
     ///
     /// # Notes
@@ -207,14 +237,20 @@ impl Control {
     ///
     /// # Examples
     ///
-    /// ```
-    /// let control_client = Control::new();
-    /// let mut map = HashMap::new();
-    /// map.insert("clientKey".to_string(), API_KEY.to_string());
-    /// map.insert("taskId".to_string(), 12345.to_string());
-    /// map.insert("name".to_string(), "my_late_variable".to_string());
-    /// map.insert("value".to_string(), "The value".to_string());
-    /// let result: Value = control_client.push_antigate_var(&map).await;
+    /// ```no_run
+    /// use std::collections::HashMap;
+    ///
+    /// use rust_anticaptcha::control::Control;
+    ///
+    /// async fn run() {
+    ///     let control_client = Control::new();
+    ///     let mut map = HashMap::new();
+    ///     map.insert("clientKey".to_string(), "API_KEY".to_string());
+    ///     map.insert("taskId".to_string(), 12345.to_string());
+    ///     map.insert("name".to_string(), "my_late_variable".to_string());
+    ///     map.insert("value".to_string(), "The value".to_string());
+    ///     control_client.push_antigate_var(&map).await;
+    /// }
     /// ```
     ///
     /// # Notes
@@ -230,13 +266,19 @@ impl Control {
     ///
     /// # Examples
     ///
-    /// ```
-    /// let control_client = Control::new();
-    /// let mut map = HashMap::new();
-    /// map.insert("clientKey".to_string(), API_KEY.to_string());
-    /// map.insert("date".to_string(), 1672185600.to_string());
-    /// map.insert("queue".to_string(), "Recaptcha Proxyless".to_string());
-    /// let result: Value = control_client.get_spending_stats(&map).await;
+    /// ```no_run
+    /// use std::collections::HashMap;
+    ///
+    /// use rust_anticaptcha::control::Control;
+    ///
+    /// async fn run() {
+    ///     let control_client = Control::new();
+    ///     let mut map = HashMap::new();
+    ///     map.insert("clientKey".to_string(), "API_KEY".to_string());
+    ///     map.insert("date".to_string(), 1672185600.to_string());
+    ///     map.insert("queue".to_string(), "Recaptcha Proxyless".to_string());
+    ///     control_client.get_spending_stats(&map).await;
+    /// }
     /// ```
     ///
     /// # Returns
@@ -255,13 +297,19 @@ impl Control {
     ///
     /// # Examples
     ///
-    /// ```
-    /// let control_client = Control::new();
-    /// let mut map = HashMap::new();
-    /// map.insert("clientKey".to_string(), API_KEY.to_string());
-    /// map.insert("softId".to_string(), 867.to_string());
-    /// map.insert("mode".to_string(), "money".to_string());
-    /// let result: Value = control_client.get_app_stats(&map).await;
+    /// ```no_run
+    /// use std::collections::HashMap;
+    ///
+    /// use rust_anticaptcha::control::Control;
+    ///
+    /// async fn run() {
+    ///     let control_client = Control::new();
+    ///     let mut map = HashMap::new();
+    ///     map.insert("clientKey".to_string(), "API_KEY".to_string());
+    ///     map.insert("softId".to_string(), 867.to_string());
+    ///     map.insert("mode".to_string(), "money".to_string());
+    ///     control_client.get_app_stats(&map).await;
+    /// }
     /// ```
     ///
     /// # Returns
