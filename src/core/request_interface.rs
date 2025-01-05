@@ -51,7 +51,7 @@ impl RequestInterface {
         payload: &CreateTaskRequest,
         enp_postfix: &EnpPostfix,
     ) -> Result<Value, String> {
-        let req_url = BASE_REQUEST_URL.to_string() + &enp_postfix.value_as_string();
+        let req_url = BASE_REQUEST_URL.to_string() + &enp_postfix.to_string();
 
         let response = self
             .request_client
@@ -77,7 +77,7 @@ impl RequestInterface {
         payload: &ResultTaskRequest,
         enp_postfix: &EnpPostfix,
     ) -> Result<Value, String> {
-        let req_url = BASE_REQUEST_URL.to_string() + &enp_postfix.value_as_string();
+        let req_url = BASE_REQUEST_URL.to_string() + &enp_postfix.to_string();
 
         let response = self
             .request_client
