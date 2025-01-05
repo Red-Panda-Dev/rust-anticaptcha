@@ -1,3 +1,9 @@
+//! # Core module
+//!
+//! This module contains different crate inner logic.
+//!
+
+
 mod structs;
 
 pub mod enums;
