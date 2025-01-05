@@ -12,8 +12,8 @@ documentation = "https://github.com/Red-Panda-Dev/rust-anticaptcha"
 rust-version = "1.83"
 
 [dependencies]
-reqwest = { version = "0.12.11", features = ["json"] }
-tokio = { version = "1.21.2", features = ["full"] }
+reqwest = { version = "0.12.12", features = ["json"] }
+tokio = { version = "1.42.0", features = ["full"] }
 serde = { version = "1.0.217", features = ["derive"] }
 base64 = "0.22.1"
 serde_json = "1.0.134"
