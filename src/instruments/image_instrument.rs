@@ -1,3 +1,17 @@
+//! # ImageInstrument module
+//!
+//! Module contains struct and functions to read and
+//! encode file from local system or web to base64 string
+//!
+//! # Basic example with image file reading and encode in base64 string
+//!
+//! ```
+//! use rust_anticaptcha::instruments::image_instrument::ImageInstrument;
+//!
+//! let image_instrument = ImageInstrument::new();
+//! let base64_str = image_instrument.read_image_file("files/captcha-image.jpg".to_string());
+//! ```
+
 use std::fs;
 use std::io::ErrorKind;
 
