@@ -41,3 +41,17 @@ Add line in your `Cargo.toml` file:
 rust-anticaptcha = "0.1.0"
 ```
 
+## How to test?
+
+1. Set API_KEY local environment variable:
+    ```bash
+    export API_KEY=anticaptcha-api-key-variable
+    ```
+2. Run full tests (with docstrings):
+    ```bash
+    cargo test
+    ```
+   Or only project specified tests:
+    ```bash
+    cargo test --tests
+    ```
