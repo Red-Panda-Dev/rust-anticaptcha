@@ -13,6 +13,7 @@
 [![codecov](https://codecov.io/gh/AndreiDrang/python3-anticaptcha/branch/main/graph/badge.svg?token=W92nfZY6Tz)](https://codecov.io/gh/AndreiDrang/python3-anticaptcha)
 
 [![Build Doc](https://github.com/Red-Panda-Dev/rust-anticaptcha/actions/workflows/build_doc.yml/badge.svg?branch=master)](https://github.com/Red-Panda-Dev/rust-anticaptcha/actions/workflows/build_doc.yml)
+[![Tests](https://github.com/Red-Panda-Dev/rust-anticaptcha/actions/workflows/test.yml/badge.svg?branch=master)](https://github.com/Red-Panda-Dev/rust-anticaptcha/actions/workflows/test.yml)
 [![Build Dev](https://github.com/Red-Panda-Dev/rust-anticaptcha/actions/workflows/build_dev.yml/badge.svg?branch=master)](https://github.com/Red-Panda-Dev/rust-anticaptcha/actions/workflows/build_dev.yml)
 [![Build Release](https://github.com/Red-Panda-Dev/rust-anticaptcha/actions/workflows/build_release.yml/badge.svg?branch=master)](https://github.com/Red-Panda-Dev/rust-anticaptcha/actions/workflows/build_release.yml)
 
