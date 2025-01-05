@@ -21,12 +21,6 @@ Tested on UNIX based OS.
 
 The library is intended for software developers and is used to work with the [AntiCaptcha](https://getcaptchasolution.com/agggpuit4b) service API.
 
-***
-
-If you have any questions, please send a message to the [Telegram](https://t.me/pythoncaptcha) chat room.
-
-Or email python-captcha@pm.me
-
 ## How to install?
 
 We recommend using the latest version of Rust. `rust-anticaptcha` supports Rust 2021.
@@ -55,3 +49,9 @@ rust-anticaptcha = "0.1.0"
     ```bash
     cargo test --tests
     ```
+
+### Contacts
+
+If you have any questions, please send a message to the [Telegram](https://t.me/pythoncaptcha) chat room.
+
+Or email python-captcha@pm.me
