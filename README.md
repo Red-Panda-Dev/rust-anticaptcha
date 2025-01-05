@@ -4,13 +4,7 @@
 
 <hr>
 
-[![PyPI version](https://badge.fury.io/py/python3-anticaptcha.svg)](https://badge.fury.io/py/python3-anticaptcha)
-[![Python versions](https://img.shields.io/pypi/pyversions/python3-anticaptcha.svg?logo=python&logoColor=FBE072)](https://badge.fury.io/py/python3-anticaptcha)
-[![Downloads](https://static.pepy.tech/badge/python3-anticaptcha/month)](https://pepy.tech/project/python3-anticaptcha)
-
-[![Code Climate](https://codeclimate.com/github/AndreiDrang/python3-anticaptcha/badges/gpa.svg)](https://codeclimate.com/github/AndreiDrang/python3-anticaptcha)
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/7f49780f2edb48d4b133833887c850e8)](https://www.codacy.com/gh/AndreiDrang/python3-anticaptcha/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=AndreiDrang/python3-anticaptcha&amp;utm_campaign=Badge_Grade)
-[![codecov](https://codecov.io/gh/AndreiDrang/python3-anticaptcha/branch/main/graph/badge.svg?token=W92nfZY6Tz)](https://codecov.io/gh/AndreiDrang/python3-anticaptcha)
+[![Crates.io Version](https://img.shields.io/crates/v/rust-anticaptcha?style=flat&color=green)](https://crates.io/crates/rust-anticaptcha)
 
 [![Build Doc](https://github.com/Red-Panda-Dev/rust-anticaptcha/actions/workflows/build_doc.yml/badge.svg?branch=master)](https://github.com/Red-Panda-Dev/rust-anticaptcha/actions/workflows/build_doc.yml)
 [![Tests](https://github.com/Red-Panda-Dev/rust-anticaptcha/actions/workflows/test.yml/badge.svg?branch=master)](https://github.com/Red-Panda-Dev/rust-anticaptcha/actions/workflows/test.yml)
@@ -40,6 +34,6 @@ cargo add rust-anticaptcha
 
 Add line in your `Cargo.toml` file:
 ```toml
-rust-anticaptcha = "0.0.1"
+rust-anticaptcha = "0.1.0"
 ```
 
