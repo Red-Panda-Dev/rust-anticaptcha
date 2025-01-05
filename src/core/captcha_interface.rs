@@ -35,7 +35,9 @@ impl CaptchaInterface {
     /// # Examples
     ///
     /// ```
-    /// let mut image_to_text_client = ImageCaptcha::new(API_KEY);
+    /// use rust_anticaptcha::image_captcha::ImageCaptcha;
+    ///
+    /// let mut image_to_text_client = ImageCaptcha::new("API_KEY".to_string());
     /// image_to_text_client.captcha_interface.set_sleep_time(3);
     /// ```
     ///
@@ -48,7 +50,9 @@ impl CaptchaInterface {
     /// # Examples
     ///
     /// ```
-    /// let mut image_to_text_client = ImageCaptcha::new(API_KEY);
+    /// use rust_anticaptcha::image_captcha::ImageCaptcha;
+    ///
+    /// let mut image_to_text_client = ImageCaptcha::new("API_KEY".to_string());
     /// image_to_text_client.captcha_interface.set_max_attempts(9);
     /// ```
     ///
@@ -61,11 +65,13 @@ impl CaptchaInterface {
     /// # Examples
     ///
     /// ```
-    /// let mut image_to_text_client = ImageCaptcha::new(API_KEY);
+    /// use rust_anticaptcha::image_captcha::ImageCaptcha;
+    ///
+    /// let mut image_to_text_client = ImageCaptcha::new("API_KEY".to_string());
     /// image_to_text_client.captcha_interface.set_callback_url("some-url".to_string());
     /// ```
     ///
-    pub fn set_callback_url(&mut self, callbackUrl: &str) {
+    pub fn set_callback_url(&mut self, callbackUrl: String) {
         self.callbackUrl = callbackUrl.to_string();
     }
 
@@ -74,12 +80,6 @@ impl CaptchaInterface {
     /// # Arguments
     /// `captcha_type` - One of image captcha types from `TaskTypeTrait`
     /// `captcha_properties` - JSON with keys/values for `task` key in payload
-    ///
-    /// # Examples
-    ///
-    /// ```
-    /// self.captcha_interface.solve_captcha(TaskType::ImageToTextTask, task_payload.clone()).await
-    /// ```
     ///
     pub async fn solve_captcha<CaptchaType: TaskTypeTrait>(
         &mut self,
@@ -102,12 +102,6 @@ impl CaptchaInterface {
 
     /// Method create task for captcha processing
     /// If task not created - return server response JSON value
-    ///
-    /// # Examples
-    ///
-    /// ```
-    /// self.create_task().await.unwrap()
-    /// ```
     ///
     /// # Notes
     /// Read more here:
@@ -139,12 +133,6 @@ impl CaptchaInterface {
     }
 
     /// Method wait and get task result
-    ///
-    /// # Examples
-    ///
-    /// ```
-    /// self.get_task_result(&task_id).await
-    /// ```
     ///
     /// # Notes
     /// Read more here:
