@@ -72,10 +72,10 @@ async fn success_image_file() {
     let mut solver_instance = ImageCaptcha::new(captcha_args.API_KEY);
 
     let result = solver_instance
-        .captcha_handler(ImageTaskType::ImageToTextTask, json!({"body":base64_str}))
+        .captcha_handler(ImageTaskType::ImageToTextTask, &json!({"body":base64_str}))
         .await;
     assert_eq!(result["errorId"], 0);
-    assert_eq!(result["status"], GetResultStatus::ready.value_as_string());
+    assert_eq!(result["status"], GetResultStatus::ready.to_string());
 }
 
 #[tokio::test]
@@ -88,7 +88,7 @@ async fn fail_image_file() {
     let mut solver_instance = ImageCaptcha::new("API_KEY".to_string());
 
     let result = solver_instance
-        .captcha_handler(ImageTaskType::ImageToTextTask, json!({"body":base64_str}))
+        .captcha_handler(ImageTaskType::ImageToTextTask, &json!({"body":base64_str}))
         .await;
 
     assert_eq!(result["errorId"], 1);
