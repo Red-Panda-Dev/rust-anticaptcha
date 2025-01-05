@@ -1,6 +1,4 @@
-use std::collections::HashMap;
-
-use serde_json::Value;
+use serde_json::{json, Value};
 
 use super::core::constants::BASE_REQUEST_URL;
 use super::core::enums::EnpPostfix;
@@ -49,11 +47,7 @@ impl Control {
     /// # Returns
     /// Method return API response JSON
     ///
-    async fn send_control_request(
-        &self,
-        payload: &HashMap<String, String>,
-        enp_postfix: &EnpPostfix,
-    ) -> Value {
+    async fn send_control_request(&self, payload: &Value, enp_postfix: &EnpPostfix) -> Value {
         let req_url = BASE_REQUEST_URL.to_string() + &enp_postfix.value_as_string();
         let result = self
             .request_interface
@@ -84,7 +78,7 @@ impl Control {
     ///
     /// async fn run() {
     ///     let control_client = Control::new();
-    ///     control_client.get_balance("API_KEY".to_string()).await;
+    ///     control_client.get_balance(&"API_KEY".to_string()).await;
     /// }
     /// ```
     ///
@@ -92,9 +86,8 @@ impl Control {
     /// Read more here:
     ///
     /// <https://anti-captcha.com/apidoc/methods/getBalance>
-    pub async fn get_balance(&self, api_key: String) -> Value {
-        let mut map: HashMap<String, String> = HashMap::new();
-        map.insert("clientKey".to_string(), api_key);
+    pub async fn get_balance(&self, api_key: &String) -> Value {
+        let map = json!({"clientKey": api_key});
 
         self.send_control_request(&map, &EnpPostfix::getBalance).await
     }
@@ -104,14 +97,13 @@ impl Control {
     /// # Examples
     ///
     /// ```no_run
-    /// use std::collections::HashMap;
+    /// use serde_json::json;
     ///
     /// use rust_anticaptcha::control::Control;
     ///
     /// async fn run() {
     ///     let control_client = Control::new();
-    ///     let mut map = HashMap::new();
-    ///     map.insert("queueId".to_string(), 6.to_string());
+    ///     let map = json!({"queueId": 6});
     ///     let result = control_client.get_queue_stats(&map).await;
     /// }
     /// ```
@@ -120,8 +112,8 @@ impl Control {
     /// Read more here:
     ///
     /// <https://anti-captcha.com/apidoc/methods/getQueueStats>
-    pub async fn get_queue_stats(&self, enp_payload: &HashMap<String, String>) -> Value {
-        self.send_control_request(&enp_payload, &EnpPostfix::getQueueStats)
+    pub async fn get_queue_stats(&self, enp_payload: &Value) -> Value {
+        self.send_control_request(enp_payload, &EnpPostfix::getQueueStats)
             .await
     }
 
@@ -130,15 +122,13 @@ impl Control {
     /// # Examples
     ///
     /// ```no_run
-    /// use std::collections::HashMap;
+    /// use serde_json::json;
     ///
     /// use rust_anticaptcha::control::Control;
     ///
     /// async fn run() {
     ///     let control_client = Control::new();
-    ///     let mut map = HashMap::new();
-    ///     map.insert("clientKey".to_string(), "API_KEY".to_string());
-    ///     map.insert("taskId".to_string(), 12345.to_string());
+    ///     let map = json!({"clientKey": "API_KEY", "taskId": 12345});
     ///     let result = control_client.report_incorrect_image(&map).await;
     /// }
     /// ```
@@ -147,7 +137,7 @@ impl Control {
     /// Read more here:
     ///
     /// <https://anti-captcha.com/apidoc/methods/reportIncorrectImageCaptcha>
-    pub async fn report_incorrect_image(&self, enp_payload: &HashMap<String, String>) -> Value {
+    pub async fn report_incorrect_image(&self, enp_payload: &Value) -> Value {
         self.send_control_request(&enp_payload, &EnpPostfix::reportIncorrectImageCaptcha)
             .await
     }
@@ -157,15 +147,13 @@ impl Control {
     /// # Examples
     ///
     /// ```no_run
-    /// use std::collections::HashMap;
+    /// use serde_json::json;
     ///
     /// use rust_anticaptcha::control::Control;
     ///
     /// async fn run() {
     ///     let control_client = Control::new();
-    ///     let mut map = HashMap::new();
-    ///     map.insert("clientKey".to_string(), "API_KEY".to_string());
-    ///     map.insert("taskId".to_string(), 12345.to_string());
+    ///     let map = json!({"clientKey": "API_KEY", "taskId": 12345});
     ///     let result = control_client.report_incorrect_recaptcha(&map).await;
     /// }
     /// ```
@@ -174,7 +162,7 @@ impl Control {
     /// Read more here:
     ///
     /// <https://anti-captcha.com/apidoc/methods/reportIncorrectRecaptcha>
-    pub async fn report_incorrect_recaptcha(&self, enp_payload: &HashMap<String, String>) -> Value {
+    pub async fn report_incorrect_recaptcha(&self, enp_payload: &Value) -> Value {
         self.send_control_request(&enp_payload, &EnpPostfix::reportIncorrectRecaptcha)
             .await
     }
@@ -184,15 +172,13 @@ impl Control {
     /// # Examples
     ///
     /// ```no_run
-    /// use std::collections::HashMap;
+    /// use serde_json::json;
     ///
     /// use rust_anticaptcha::control::Control;
     ///
     /// async fn run() {
     ///     let control_client = Control::new();
-    ///     let mut map = HashMap::new();
-    ///     map.insert("clientKey".to_string(), "API_KEY".to_string());
-    ///     map.insert("taskId".to_string(), 12345.to_string());
+    ///     let map = json!({"clientKey": "API_KEY", "taskId": 12345});
     ///     control_client.report_correct_recaptcha(&map).await;
     /// }
     /// ```
@@ -201,7 +187,7 @@ impl Control {
     /// Read more here:
     ///
     /// <https://anti-captcha.com/apidoc/methods/reportCorrectRecaptcha>
-    pub async fn report_correct_recaptcha(&self, enp_payload: &HashMap<String, String>) -> Value {
+    pub async fn report_correct_recaptcha(&self, enp_payload: &Value) -> Value {
         self.send_control_request(&enp_payload, &EnpPostfix::reportCorrectRecaptcha)
             .await
     }
@@ -211,15 +197,13 @@ impl Control {
     /// # Examples
     ///
     /// ```no_run
-    /// use std::collections::HashMap;
+    /// use serde_json::json;
     ///
     /// use rust_anticaptcha::control::Control;
     ///
     /// async fn run() {
     ///     let control_client = Control::new();
-    ///     let mut map = HashMap::new();
-    ///     map.insert("clientKey".to_string(), "API_KEY".to_string());
-    ///     map.insert("taskId".to_string(), 12345.to_string());
+    ///     let map = json!({"clientKey": "API_KEY", "taskId": 12345});
     ///     control_client.report_incorrect_hcaptcha(&map).await;
     /// };
     /// ```
@@ -228,7 +212,7 @@ impl Control {
     /// Read more here:
     ///
     /// <https://anti-captcha.com/apidoc/methods/reportIncorrectHcaptcha>
-    pub async fn report_incorrect_hcaptcha(&self, enp_payload: &HashMap<String, String>) -> Value {
+    pub async fn report_incorrect_hcaptcha(&self, enp_payload: &Value) -> Value {
         self.send_control_request(&enp_payload, &EnpPostfix::reportIncorrectHcaptcha)
             .await
     }
@@ -238,17 +222,18 @@ impl Control {
     /// # Examples
     ///
     /// ```no_run
-    /// use std::collections::HashMap;
+    /// use serde_json::json;
     ///
     /// use rust_anticaptcha::control::Control;
     ///
     /// async fn run() {
     ///     let control_client = Control::new();
-    ///     let mut map = HashMap::new();
-    ///     map.insert("clientKey".to_string(), "API_KEY".to_string());
-    ///     map.insert("taskId".to_string(), 12345.to_string());
-    ///     map.insert("name".to_string(), "my_late_variable".to_string());
-    ///     map.insert("value".to_string(), "The value".to_string());
+    ///     let map = json!({
+    ///                     "clientKey": "API_KEY",
+    ///                     "taskId": 12345,
+    ///                     "name": "my_late_variable",
+    ///                     "value": "some_value"
+    ///                 });
     ///     control_client.push_antigate_var(&map).await;
     /// }
     /// ```
@@ -257,7 +242,7 @@ impl Control {
     /// Read more here:
     ///
     /// <https://anti-captcha.com/apidoc/methods/pushAntiGateVariable>
-    pub async fn push_antigate_var(&self, enp_payload: &HashMap<String, String>) -> Value {
+    pub async fn push_antigate_var(&self, enp_payload: &Value) -> Value {
         self.send_control_request(&enp_payload, &EnpPostfix::pushAntiGateVariable)
             .await
     }
@@ -267,16 +252,17 @@ impl Control {
     /// # Examples
     ///
     /// ```no_run
-    /// use std::collections::HashMap;
+    /// use serde_json::json;
     ///
     /// use rust_anticaptcha::control::Control;
     ///
     /// async fn run() {
     ///     let control_client = Control::new();
-    ///     let mut map = HashMap::new();
-    ///     map.insert("clientKey".to_string(), "API_KEY".to_string());
-    ///     map.insert("date".to_string(), 1672185600.to_string());
-    ///     map.insert("queue".to_string(), "Recaptcha Proxyless".to_string());
+    ///     let map = json!({
+    ///                     "clientKey": "API_KEY",
+    ///                     "date": 1672185600,
+    ///                     "queue": "Recaptcha Proxyless"
+    ///                 });
     ///     control_client.get_spending_stats(&map).await;
     /// }
     /// ```
@@ -288,7 +274,7 @@ impl Control {
     /// Read more here:
     ///
     /// <https://anti-captcha.com/apidoc/methods/getSpendingStats>
-    pub async fn get_spending_stats(&self, enp_payload: &HashMap<String, String>) -> Value {
+    pub async fn get_spending_stats(&self, enp_payload: &Value) -> Value {
         self.send_control_request(&enp_payload, &EnpPostfix::getSpendingStats)
             .await
     }
@@ -298,16 +284,17 @@ impl Control {
     /// # Examples
     ///
     /// ```no_run
-    /// use std::collections::HashMap;
+    /// use serde_json::json;
     ///
     /// use rust_anticaptcha::control::Control;
     ///
     /// async fn run() {
     ///     let control_client = Control::new();
-    ///     let mut map = HashMap::new();
-    ///     map.insert("clientKey".to_string(), "API_KEY".to_string());
-    ///     map.insert("softId".to_string(), 867.to_string());
-    ///     map.insert("mode".to_string(), "money".to_string());
+    ///     let map = json!({
+    ///                     "clientKey": "API_KEY",
+    ///                     "softId": 867,
+    ///                     "mode": "money"
+    ///                 });
     ///     control_client.get_app_stats(&map).await;
     /// }
     /// ```
@@ -320,7 +307,7 @@ impl Control {
     /// Read more here:
     ///
     /// <https://anti-captcha.com/apidoc/methods/getAppStats>
-    pub async fn get_app_stats(&self, enp_payload: &HashMap<String, String>) -> Value {
+    pub async fn get_app_stats(&self, enp_payload: &Value) -> Value {
         self.send_control_request(&enp_payload, &EnpPostfix::getAppStats)
             .await
     }
