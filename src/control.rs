@@ -48,7 +48,7 @@ impl Control {
     /// Method return API response JSON
     ///
     async fn send_control_request(&self, payload: &Value, enp_postfix: &EnpPostfix) -> Value {
-        let req_url = BASE_REQUEST_URL.to_string() + &enp_postfix.value_as_string();
+        let req_url = BASE_REQUEST_URL.to_string() + &enp_postfix.to_string();
         let result = self
             .request_interface
             .send_post_request(&payload, &req_url)
