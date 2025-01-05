@@ -64,6 +64,7 @@ use super::core::enums::ImageTaskType;
 /// Read more here:
 ///
 /// <https://anti-captcha.com/apidoc/task-types/ImageToTextTask>
+///
 /// <https://anti-captcha.com/apidoc/task-types/ImageToCoordinatesTask>
 ///
 pub struct ImageCaptcha {
