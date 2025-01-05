@@ -21,7 +21,7 @@ use super::core::enums::TokenTaskType;
 ///         });
 ///
 ///     let mut image_to_text_client = TokenCaptcha::new("API_KEY".to_string());
-///     image_to_text_client.captcha_handler(TokenTaskType::RecaptchaV2TaskProxyless, map).await;
+///     image_to_text_client.captcha_handler(TokenTaskType::RecaptchaV2TaskProxyless, &map).await;
 /// }
 /// ```
 ///
@@ -83,16 +83,16 @@ impl TokenCaptcha {
     ///         });
     ///
     ///     let mut image_to_text_client = TokenCaptcha::new("API_KEY".to_string());
-    ///     image_to_text_client.captcha_handler(TokenTaskType::RecaptchaV2TaskProxyless, map).await;
+    ///     image_to_text_client.captcha_handler(TokenTaskType::RecaptchaV2TaskProxyless, &map).await;
     /// }
     /// ```
     pub async fn captcha_handler(
         &mut self,
         captcha_type: TokenTaskType,
-        task_payload: Value,
+        task_payload: &Value,
     ) -> Value {
         self.captcha_interface
-            .solve_captcha(captcha_type, task_payload)
+            .solve_captcha(captcha_type, &task_payload)
             .await
     }
 }
