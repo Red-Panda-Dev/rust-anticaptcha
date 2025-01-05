@@ -8,33 +8,56 @@ use super::core::enums::ImageTaskType;
 /// # Examples
 ///
 /// With already prepared base64 string
-/// ```
-/// let map = json!({"body": base64_string});
+/// ```no_run
+/// use serde_json::json;
 ///
-/// let image_to_text_client = ImageCaptcha::new(API_KEY);
-/// let result = image_to_text_client.captcha_handler(ImageTaskType::ImageToCoordinatesTask, map);
+/// use rust_anticaptcha::core::enums::ImageTaskType;
+/// use rust_anticaptcha::image_captcha::ImageCaptcha;
+///
+/// async fn run() {
+///     let map = json!({"body": "base64_string"});
+///
+///     let mut image_to_text_client = ImageCaptcha::new("API_KEY".to_string());
+///     image_to_text_client.captcha_handler(ImageTaskType::ImageToCoordinatesTask, map).await;
+/// }
 /// ```
 ///
 /// With image as file
-/// ```
-/// let image_instrument = ImageInstrument::new();
-/// let image_file_base64 = image_instrument.read_image_file("captcha-image.jpg".to_string());
+/// ```no_run
+/// use serde_json::json;
 ///
-/// let map = json!({"body": image_file_base64});
+/// use rust_anticaptcha::core::enums::ImageTaskType;
+/// use rust_anticaptcha::image_captcha::ImageCaptcha;
+/// use rust_anticaptcha::instruments::image_instrument::ImageInstrument;
 ///
-/// let image_to_text_client = ImageCaptcha::new(API_KEY);
-/// let result = image_to_text_client.captcha_handler(ImageTaskType::ImageToTextTask, map);
+/// async fn run() {
+///     let image_instrument = ImageInstrument::new();
+///     let image_file_base64 = image_instrument.read_image_file("files/captcha-image.jpg".to_string());
+///
+///     let map = json!({"body": image_file_base64});
+///
+///     let mut image_to_text_client = ImageCaptcha::new("API_KEY".to_string());
+///     image_to_text_client.captcha_handler(ImageTaskType::ImageToTextTask, map).await;
+/// }
 /// ```
 ///
 /// With image as link
-/// ```
-/// let image_instrument = ImageInstrument::new();
-/// let image_link_base64 = image_instrument.read_image_link("https://captcha-image.jpg".to_string()).await;
+/// ```no_run
+/// use serde_json::json;
 ///
-/// let map = json!({"body": image_link_base64});
+/// use rust_anticaptcha::core::enums::ImageTaskType;
+/// use rust_anticaptcha::image_captcha::ImageCaptcha;
+/// use rust_anticaptcha::instruments::image_instrument::ImageInstrument;
 ///
-/// let image_to_text_client = ImageCaptcha::new(API_KEY);
-/// let result = image_to_text_client.captcha_handler(ImageTaskType::ImageToTextTask, map);
+/// async fn run() {
+///     let image_instrument = ImageInstrument::new();
+///     let image_link_base64 = image_instrument.read_image_link("https://captcha-image.jpg".to_string()).await;
+///
+///     let map = json!({"body": image_link_base64});
+///
+///     let mut image_to_text_client = ImageCaptcha::new("API_KEY".to_string());
+///     image_to_text_client.captcha_handler(ImageTaskType::ImageToTextTask, map).await;
+/// }
 /// ```
 ///
 /// # Notes
@@ -55,7 +78,9 @@ impl ImageCaptcha {
     /// # Examples
     ///
     /// ```
-    /// let image_to_text_client = ImageCaptcha::new(API_KEY);
+    /// use rust_anticaptcha::image_captcha::ImageCaptcha;
+    ///
+    /// let image_to_text_client = ImageCaptcha::new("API_KEY".to_string());
     /// ```
     /// # Returns
     /// Method return new `ImageCaptcha` instance
@@ -74,11 +99,18 @@ impl ImageCaptcha {
     ///
     /// # Examples
     ///
-    /// ```
-    /// let map = json!({"body": base64_string});
+    /// ```no_run
+    /// use serde_json::json;
     ///
-    /// let image_to_text_client = ImageCaptcha::new(API_KEY);
-    /// let result = image_to_text_client.captcha_handler(ImageTaskType::ImageToTextTask, map);
+    /// use rust_anticaptcha::core::enums::ImageTaskType;
+    /// use rust_anticaptcha::image_captcha::ImageCaptcha;
+    ///
+    /// async fn run() {
+    ///     let map = json!({"body": "base64_string"});
+    ///
+    ///     let mut image_to_text_client = ImageCaptcha::new("API_KEY".to_string());
+    ///     image_to_text_client.captcha_handler(ImageTaskType::ImageToTextTask, map).await;
+    /// }
     /// ```
     pub async fn captcha_handler(
         &mut self,
