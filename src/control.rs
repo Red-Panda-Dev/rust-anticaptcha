@@ -1,3 +1,34 @@
+//! # Control module
+//!
+//! This module is responsible for additional AntiCaptcha API service methods:
+//!
+//! - Get balance
+//! - Get app statistics
+//! - Report incorrect captcha
+//! - Report correct captcha
+//! - Get spending stats
+//! - Push antigate variables
+//!
+//! ## Basic example for Control `get_balance` method
+//!
+//! ```no_run
+//! use rust_anticaptcha::control::Control;
+//!
+//! async fn run() {
+//!     let control_client = Control::new();
+//!     control_client.get_balance(&"API_KEY".to_string()).await;
+//! }
+//! ```
+//!
+//! # Notes
+//! Read more here:
+//!
+//! <https://anti-captcha.com/apidoc/methods/getBalance>
+//!
+//! <https://anti-captcha.com/apidoc/methods/getAppStats>
+//!
+//! <https://anti-captcha.com/apidoc/methods/getSpendingStats>
+//!
 use serde_json::{json, Value};
 
 use super::core::constants::BASE_REQUEST_URL;
