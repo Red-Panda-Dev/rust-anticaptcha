@@ -1,7 +1,6 @@
 use std::fmt;
 
 pub trait TaskTypeTrait {
-
     fn as_string(&self) -> String;
 }
 
@@ -13,10 +12,6 @@ pub enum ImageTaskType {
 impl TaskTypeTrait for ImageTaskType {
     fn as_string(&self) -> String {
         format!("{}", &self)
-    }}
-impl fmt::Display for ImageTaskType {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "{:?}", self)
     }
 }
 
@@ -45,10 +40,6 @@ pub enum TokenTaskType {
 impl TaskTypeTrait for TokenTaskType {
     fn as_string(&self) -> String {
         format!("{}", &self)
-    }}
-impl fmt::Display for TokenTaskType {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "{:?}", self)
     }
 }
 
