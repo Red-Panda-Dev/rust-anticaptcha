@@ -15,15 +15,16 @@ on:
       - 'src/**'
       - 'tests/**'
       - 'Cargo.toml'
+  schedule:
+    - cron: "5 0 * * 1"
 
 env:
   CARGO_TERM_COLOR: always
+  API_KEY: ${{ secrets.API_KEY }}
 
 jobs:
   test:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v4
     - name: Test
