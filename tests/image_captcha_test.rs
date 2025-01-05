@@ -5,18 +5,6 @@ use crate::structs::ImageCaptchaArgs;
 
 mod structs;
 
-struct ImageToTextTests {
-    image_captcha_args: ImageCaptchaArgs,
-}
-
-impl ImageToTextTests {
-    pub fn new() -> Self {
-        ImageToTextTests {
-            image_captcha_args: ImageCaptchaArgs::new(),
-        }
-    }
-}
-
 #[test]
 fn image_captcha_instance() {
     let captcha_args = ImageCaptchaArgs::new();
