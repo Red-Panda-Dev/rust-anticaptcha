@@ -18,7 +18,7 @@ use super::core::enums::ImageTaskType;
 ///     let map = json!({"body": "base64_string"});
 ///
 ///     let mut image_to_text_client = ImageCaptcha::new("API_KEY".to_string());
-///     image_to_text_client.captcha_handler(ImageTaskType::ImageToCoordinatesTask, map).await;
+///     image_to_text_client.captcha_handler(ImageTaskType::ImageToCoordinatesTask, &map).await;
 /// }
 /// ```
 ///
@@ -37,7 +37,7 @@ use super::core::enums::ImageTaskType;
 ///     let map = json!({"body": image_file_base64});
 ///
 ///     let mut image_to_text_client = ImageCaptcha::new("API_KEY".to_string());
-///     image_to_text_client.captcha_handler(ImageTaskType::ImageToTextTask, map).await;
+///     image_to_text_client.captcha_handler(ImageTaskType::ImageToTextTask, &map).await;
 /// }
 /// ```
 ///
@@ -56,7 +56,7 @@ use super::core::enums::ImageTaskType;
 ///     let map = json!({"body": image_link_base64});
 ///
 ///     let mut image_to_text_client = ImageCaptcha::new("API_KEY".to_string());
-///     image_to_text_client.captcha_handler(ImageTaskType::ImageToTextTask, map).await;
+///     image_to_text_client.captcha_handler(ImageTaskType::ImageToTextTask, &map).await;
 /// }
 /// ```
 ///
@@ -109,13 +109,13 @@ impl ImageCaptcha {
     ///     let map = json!({"body": "base64_string"});
     ///
     ///     let mut image_to_text_client = ImageCaptcha::new("API_KEY".to_string());
-    ///     image_to_text_client.captcha_handler(ImageTaskType::ImageToTextTask, map).await;
+    ///     image_to_text_client.captcha_handler(ImageTaskType::ImageToTextTask, &map).await;
     /// }
     /// ```
     pub async fn captcha_handler(
         &mut self,
         captcha_type: ImageTaskType,
-        task_payload: Value,
+        task_payload: &Value,
     ) -> Value {
         self.captcha_interface
             .solve_captcha(captcha_type, task_payload)
