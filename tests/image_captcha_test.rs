@@ -4,13 +4,13 @@ use rust_anticaptcha::core::enums::{GetResultStatus, ImageTaskType};
 use rust_anticaptcha::image_captcha::ImageCaptcha;
 use rust_anticaptcha::instruments::image_instrument::ImageInstrument;
 
-use crate::structs::ImageCaptchaArgs;
+use crate::structs::CaptchaArgs;
 
 mod structs;
 
 #[test]
 fn image_captcha_instance() {
-    let captcha_args = ImageCaptchaArgs::new();
+    let captcha_args = CaptchaArgs::new();
 
     ImageCaptcha::new(captcha_args.API_KEY);
 }
@@ -22,7 +22,7 @@ fn image_instrument_instance() {
 
 #[tokio::test]
 async fn image_instrument_read_image_link() {
-    let captcha_args = ImageCaptchaArgs::new();
+    let captcha_args = CaptchaArgs::new();
 
     let instance = ImageInstrument::new();
     assert!(instance
@@ -33,7 +33,7 @@ async fn image_instrument_read_image_link() {
 
 #[test]
 fn image_instrument_read_image_file() {
-    let captcha_args = ImageCaptchaArgs::new();
+    let captcha_args = CaptchaArgs::new();
 
     let instance = ImageInstrument::new();
     assert!(instance
@@ -43,7 +43,7 @@ fn image_instrument_read_image_file() {
 
 #[tokio::test]
 async fn image_instrument_read_coord_image_link() {
-    let captcha_args = ImageCaptchaArgs::new();
+    let captcha_args = CaptchaArgs::new();
 
     let instance = ImageInstrument::new();
     assert!(instance
@@ -54,7 +54,7 @@ async fn image_instrument_read_coord_image_link() {
 
 #[test]
 fn image_instrument_read_coord_image_file() {
-    let captcha_args = ImageCaptchaArgs::new();
+    let captcha_args = CaptchaArgs::new();
 
     let instance = ImageInstrument::new();
     assert!(instance
@@ -64,7 +64,7 @@ fn image_instrument_read_coord_image_file() {
 
 #[tokio::test]
 async fn success_image_file() {
-    let captcha_args = ImageCaptchaArgs::new();
+    let captcha_args = CaptchaArgs::new();
 
     let instance = ImageInstrument::new();
     let base64_str = instance.read_image_file(captcha_args.captcha_file);
@@ -80,7 +80,7 @@ async fn success_image_file() {
 
 #[tokio::test]
 async fn fail_image_file() {
-    let captcha_args = ImageCaptchaArgs::new();
+    let captcha_args = CaptchaArgs::new();
 
     let instance = ImageInstrument::new();
     let base64_str = instance.read_image_file(captcha_args.captcha_file);
