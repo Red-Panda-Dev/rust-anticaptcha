@@ -3,7 +3,7 @@
 
 use std::env::var;
 
-pub struct ImageCaptchaArgs {
+pub struct CaptchaArgs {
     pub API_KEY: String,
     pub captcha_file: String,
     pub captcha_url: String,
@@ -14,9 +14,9 @@ pub struct ImageCaptchaArgs {
     pub coord_captcha_ends_with: String,
 }
 
-impl ImageCaptchaArgs {
+impl CaptchaArgs {
     pub fn new() -> Self {
-        ImageCaptchaArgs {
+        CaptchaArgs {
             API_KEY: var("API_KEY").expect("You must set `API_KEY` variable"),
             captcha_file: "files/captcha-image.jpg".to_string(),
             captcha_url : "https://raw.githubusercontent.com/AndreiDrang/python3-anticaptcha/refs/heads/main/files/captcha-image.jpg".to_string(),
