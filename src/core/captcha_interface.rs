@@ -68,10 +68,10 @@ impl CaptchaInterface {
     /// use rust_anticaptcha::image_captcha::ImageCaptcha;
     ///
     /// let mut image_to_text_client = ImageCaptcha::new("API_KEY".to_string());
-    /// image_to_text_client.captcha_interface.set_callback_url("some-url".to_string());
+    /// image_to_text_client.captcha_interface.set_callback_url(&"some-url".to_string());
     /// ```
     ///
-    pub fn set_callback_url(&mut self, callbackUrl: String) {
+    pub fn set_callback_url(&mut self, callbackUrl: &String) {
         self.callbackUrl = callbackUrl.to_string();
     }
 
@@ -84,11 +84,11 @@ impl CaptchaInterface {
     pub async fn solve_captcha<CaptchaType: TaskTypeTrait>(
         &mut self,
         captcha_type: CaptchaType,
-        captcha_properties: Value,
+        captcha_properties: &Value,
     ) -> Value {
         // fill task payload with params
-        self.task_payload = captcha_properties;
-        self.task_payload["type"] = Value::String(captcha_type.value_as_string());
+        self.task_payload = captcha_properties.clone();
+        self.task_payload["type"] = Value::String(captcha_type.as_string());
 
         let task_id = match self.create_task().await {
             Ok(task_id) => task_id,
@@ -97,7 +97,7 @@ impl CaptchaInterface {
 
         sleep(Duration::from_secs(self.sleep_time as u64)).await;
 
-        self.get_task_result(&task_id).await
+        self.get_task_result(task_id).await
     }
 
     /// Method create task for captcha processing
@@ -139,7 +139,7 @@ impl CaptchaInterface {
     ///
     /// <https://anti-captcha.com/apidoc/methods/getTaskResult>
     ///
-    async fn get_task_result(&self, task_id: &String) -> Value {
+    async fn get_task_result(&self, task_id: String) -> Value {
         let mut attempt: u8 = 0;
 
         let get_result_payload = ResultTaskRequest {
@@ -163,7 +163,7 @@ impl CaptchaInterface {
                 });
 
             if task_result["errorId"] == 0 {
-                if task_result["status"] == GetResultStatus::ready.value_as_string() {
+                if task_result["status"] == GetResultStatus::ready.to_string() {
                     return task_result;
                 }
             } else {
