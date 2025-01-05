@@ -8,13 +8,11 @@ use super::enums::EnpPostfix;
 use super::structs::{CreateTaskRequest, ResultTaskRequest};
 
 pub struct RequestInterface {
-    task_payload: HashMap<String, String>,
     request_client: reqwest::Client,
 }
 impl RequestInterface {
     pub fn new() -> Self {
         RequestInterface {
-            task_payload: HashMap::new(),
             request_client: reqwest::Client::new(),
         }
     }
