@@ -13,6 +13,8 @@ use crate::core::request_interface::RequestInterface;
 /// # Examples
 ///
 /// ```
+/// use rust_anticaptcha::instruments::image_instrument::ImageInstrument;
+///
 /// let image_instrument = ImageInstrument::new();
 /// ```
 pub struct ImageInstrument {
@@ -24,6 +26,8 @@ impl ImageInstrument {
     /// # Examples
     ///
     /// ```
+    /// use rust_anticaptcha::instruments::image_instrument::ImageInstrument;
+    ///
     /// let image_instrument = ImageInstrument::new();
     /// ```
     ///
@@ -44,8 +48,10 @@ impl ImageInstrument {
     /// # Examples
     ///
     /// ```
+    /// use rust_anticaptcha::instruments::image_instrument::ImageInstrument;
+    ///
     /// let image_instrument = ImageInstrument::new();
-    /// let base64_str = image_instrument.read_image_file("files/image.jpg".to_string());
+    /// let base64_str = image_instrument.read_image_file("files/captcha-image.jpg".to_string());
     /// ```
     ///
     /// # Returns
@@ -70,6 +76,8 @@ impl ImageInstrument {
     /// # Examples
     ///
     /// ```
+    /// use rust_anticaptcha::instruments::image_instrument::ImageInstrument;
+    ///
     /// let image_instrument = ImageInstrument::new();
     /// let base64_str = image_instrument.read_image_link("https://some-file-url.jpg".to_string());
     /// ```
