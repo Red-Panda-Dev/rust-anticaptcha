@@ -1,6 +1,5 @@
-use std::collections::HashMap;
-
 use rust_anticaptcha::control::Control;
+use serde_json::json;
 
 use crate::structs::CaptchaArgs;
 
@@ -16,7 +15,7 @@ async fn success_get_balance() {
     let captcha_args = CaptchaArgs::new();
 
     let control_instance = Control::new();
-    let result = control_instance.get_balance(captcha_args.API_KEY).await;
+    let result = control_instance.get_balance(&captcha_args.API_KEY).await;
     assert_eq!(result["errorId"], 0);
     assert_ne!(result["balance"], 0);
 }
@@ -25,10 +24,11 @@ async fn success_get_balance() {
 async fn success_get_app_stats() {
     let captcha_args = CaptchaArgs::new();
 
-    let mut map = HashMap::new();
-    map.insert("clientKey".to_string(), captcha_args.API_KEY);
-    map.insert("softId".to_string(), 1220.to_string());
-    map.insert("mode".to_string(), "money".to_string());
+    let map = json!({
+         "clientKey": captcha_args.API_KEY,
+         "softId": 1220,
+         "mode": "money"
+    });
 
     let control_instance = Control::new();
     let result = control_instance.get_app_stats(&map).await;
@@ -40,7 +40,7 @@ async fn success_get_app_stats() {
 #[tokio::test]
 async fn fail_get_balance() {
     let control_instance = Control::new();
-    let result = control_instance.get_balance("API_KEY".to_string()).await;
+    let result = control_instance.get_balance(&"API_KEY".to_string()).await;
 
     assert_eq!(result["errorId"], 1);
     assert_eq!(result["errorCode"], "ERROR_KEY_DOES_NOT_EXIST");
