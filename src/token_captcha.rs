@@ -29,12 +29,19 @@ use super::core::enums::TokenTaskType;
 /// Read more here:
 ///
 /// <https://anti-captcha.com/apidoc/task-types/RecaptchaV2TaskProxyless>
+///
 /// <https://anti-captcha.com/apidoc/task-types/RecaptchaV3TaskProxyless>
+///
 /// <https://anti-captcha.com/apidoc/task-types/RecaptchaV2EnterpriseTaskProxyless>
+///
 /// <https://anti-captcha.com/apidoc/task-types/RecaptchaV3Enterprise>
+///
 /// <https://anti-captcha.com/apidoc/task-types/FunCaptchaTaskProxyless>
+///
 /// <https://anti-captcha.com/apidoc/task-types/GeeTestTaskProxyless>
+///
 /// <https://anti-captcha.com/apidoc/task-types/TurnstileTaskProxyless>
+///
 /// <https://anti-captcha.com/apidoc/task-types/AntiGateTask>
 ///
 pub struct TokenCaptcha {
