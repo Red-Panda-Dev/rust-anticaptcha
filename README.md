@@ -1,6 +1,6 @@
 # rust-anticaptcha
 
-[![RustLogo_640x320_.png](https://s.vyjava.xyz/files/2025/01-January/04/1cbd42dd/RustLogo_640x320_.png)](https://vyjava.xyz/dashboard/image/1cbd42dd-d576-4382-b765-01181b894056)
+[![RustLogo.png](https://s.vyjava.xyz/files/2025/01-January/04/1cbd42dd/RustLogo.png)](https://vyjava.xyz/dashboard/image/1cbd42dd-d576-4382-b765-01181b894056)
 
 <hr>
 
