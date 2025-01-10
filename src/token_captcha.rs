@@ -122,7 +122,7 @@ impl TokenCaptcha {
         task_payload: &Value,
     ) -> Value {
         self.captcha_interface
-            .solve_captcha(captcha_type, &task_payload)
+            .solve_captcha(captcha_type, task_payload)
             .await
     }
 }
