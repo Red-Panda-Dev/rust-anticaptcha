@@ -1,7 +1,7 @@
 [package]
 name = "rust-anticaptcha"
 description = "Rust library for AntiCaptcha service API."
-version = "0.2.1"
+version = "0.2.2"
 edition = "2021"
 authors = ["Red-Panda-Dev <python-captcha@pm.me>"]
 keywords = ["captcha", "anticaptcha", "recaptcha", "funcaptcha", "geetest"]
@@ -10,6 +10,9 @@ repository = "https://github.com/Red-Panda-Dev/rust-anticaptcha"
 homepage = "https://crates.io/crates/rust-anticaptcha"
 documentation = "https://docs.rs/rust-anticaptcha/latest/rust_anticaptcha/"
 rust-version = "1.83"
+exclude = ["files/*", ".github/*", "tests/*",
+            ".gitignore", "rustfmt.toml", "LICENSE",
+            "CODE_OF_CONDUCT.md", "CONTRIBUTING.md"]
 
 [dependencies]
 reqwest = { version = "0.12.12", features = ["json"] }
