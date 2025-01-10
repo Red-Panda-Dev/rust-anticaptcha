@@ -8,6 +8,12 @@ use super::structs::{CreateTaskRequest, ResultTaskRequest};
 pub struct RequestInterface {
     request_client: reqwest::Client,
 }
+impl Default for RequestInterface {
+    fn default() -> Self {
+        RequestInterface::new()
+    }
+}
+
 impl RequestInterface {
     pub fn new() -> Self {
         RequestInterface {
