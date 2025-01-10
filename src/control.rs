@@ -29,11 +29,10 @@
 //!
 //! <https://anti-captcha.com/apidoc/methods/getSpendingStats>
 //!
-use serde_json::{json, Value};
-
 use super::core::constants::BASE_REQUEST_URL;
 use super::core::enums::EnpPostfix;
 use super::core::request_interface::RequestInterface;
+use serde_json::{json, Value};
 
 /// Structure help processing additional AntiCaptcha methods
 ///
@@ -52,6 +51,11 @@ use super::core::request_interface::RequestInterface;
 ///
 pub struct Control {
     request_interface: RequestInterface,
+}
+impl Default for Control {
+    fn default() -> Self {
+        Control::new()
+    }
 }
 impl Control {
     /// Method init new Control struct with Web Requests Client
@@ -82,7 +86,7 @@ impl Control {
         let req_url = BASE_REQUEST_URL.to_string() + &enp_postfix.to_string();
         let result = self
             .request_interface
-            .send_post_request(&payload, &req_url)
+            .send_post_request(payload, &req_url)
             .await
             .unwrap();
 
@@ -169,7 +173,7 @@ impl Control {
     ///
     /// <https://anti-captcha.com/apidoc/methods/reportIncorrectImageCaptcha>
     pub async fn report_incorrect_image(&self, enp_payload: &Value) -> Value {
-        self.send_control_request(&enp_payload, &EnpPostfix::reportIncorrectImageCaptcha)
+        self.send_control_request(enp_payload, &EnpPostfix::reportIncorrectImageCaptcha)
             .await
     }
 
@@ -194,7 +198,7 @@ impl Control {
     ///
     /// <https://anti-captcha.com/apidoc/methods/reportIncorrectRecaptcha>
     pub async fn report_incorrect_recaptcha(&self, enp_payload: &Value) -> Value {
-        self.send_control_request(&enp_payload, &EnpPostfix::reportIncorrectRecaptcha)
+        self.send_control_request(enp_payload, &EnpPostfix::reportIncorrectRecaptcha)
             .await
     }
 
@@ -219,7 +223,7 @@ impl Control {
     ///
     /// <https://anti-captcha.com/apidoc/methods/reportCorrectRecaptcha>
     pub async fn report_correct_recaptcha(&self, enp_payload: &Value) -> Value {
-        self.send_control_request(&enp_payload, &EnpPostfix::reportCorrectRecaptcha)
+        self.send_control_request(enp_payload, &EnpPostfix::reportCorrectRecaptcha)
             .await
     }
 
@@ -244,7 +248,7 @@ impl Control {
     ///
     /// <https://anti-captcha.com/apidoc/methods/reportIncorrectHcaptcha>
     pub async fn report_incorrect_hcaptcha(&self, enp_payload: &Value) -> Value {
-        self.send_control_request(&enp_payload, &EnpPostfix::reportIncorrectHcaptcha)
+        self.send_control_request(enp_payload, &EnpPostfix::reportIncorrectHcaptcha)
             .await
     }
 
@@ -274,7 +278,7 @@ impl Control {
     ///
     /// <https://anti-captcha.com/apidoc/methods/pushAntiGateVariable>
     pub async fn push_antigate_var(&self, enp_payload: &Value) -> Value {
-        self.send_control_request(&enp_payload, &EnpPostfix::pushAntiGateVariable)
+        self.send_control_request(enp_payload, &EnpPostfix::pushAntiGateVariable)
             .await
     }
 
@@ -306,7 +310,7 @@ impl Control {
     ///
     /// <https://anti-captcha.com/apidoc/methods/getSpendingStats>
     pub async fn get_spending_stats(&self, enp_payload: &Value) -> Value {
-        self.send_control_request(&enp_payload, &EnpPostfix::getSpendingStats)
+        self.send_control_request(enp_payload, &EnpPostfix::getSpendingStats)
             .await
     }
 
@@ -339,7 +343,7 @@ impl Control {
     ///
     /// <https://anti-captcha.com/apidoc/methods/getAppStats>
     pub async fn get_app_stats(&self, enp_payload: &Value) -> Value {
-        self.send_control_request(&enp_payload, &EnpPostfix::getAppStats)
+        self.send_control_request(enp_payload, &EnpPostfix::getAppStats)
             .await
     }
 }
