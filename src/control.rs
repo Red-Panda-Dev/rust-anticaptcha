@@ -29,10 +29,11 @@
 //!
 //! <https://anti-captcha.com/apidoc/methods/getSpendingStats>
 //!
+use serde_json::{json, Value};
+
 use super::core::constants::BASE_REQUEST_URL;
 use super::core::enums::EnpPostfix;
 use super::core::request_interface::RequestInterface;
-use serde_json::{json, Value};
 
 /// Structure help processing additional AntiCaptcha methods
 ///
