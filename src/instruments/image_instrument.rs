@@ -34,6 +34,11 @@ use crate::core::request_interface::RequestInterface;
 pub struct ImageInstrument {
     engine: GeneralPurpose,
 }
+impl Default for ImageInstrument {
+    fn default() -> Self {
+        ImageInstrument::new()
+    }
+}
 impl ImageInstrument {
     /// Method init new ImageInstrument struct with base64 engine
     ///
