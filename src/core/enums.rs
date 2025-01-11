@@ -1,6 +1,7 @@
 use std::fmt;
 
 pub trait TaskTypeTrait {
+    /// `TaskTypeTrait` analog for `to_string()`
     fn as_string(&self) -> String;
 }
 
@@ -10,6 +11,7 @@ pub enum ImageTaskType {
     ImageToCoordinatesTask,
 }
 impl TaskTypeTrait for ImageTaskType {
+    /// `ImageTaskType` analog for `to_string()`
     fn as_string(&self) -> String {
         format!("{:?}", &self)
     }
@@ -38,6 +40,7 @@ pub enum TokenTaskType {
     AntiGateTask,
 }
 impl TaskTypeTrait for TokenTaskType {
+    /// `TokenTaskType` analog for `to_string()`
     fn as_string(&self) -> String {
         format!("{:?}", &self)
     }
@@ -61,6 +64,7 @@ pub enum EnpPostfix {
     pushAntiGateVariable,
 }
 impl fmt::Display for EnpPostfix {
+    /// `EnpPostfix` formatter
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(f, "{:?}", self)
     }
@@ -73,6 +77,7 @@ pub enum GetResultStatus {
     error,
 }
 impl fmt::Display for GetResultStatus {
+    /// `GetResultStatus` formatter
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(f, "{:?}", self)
     }
