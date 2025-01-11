@@ -2,6 +2,7 @@
 //!
 //! Module contains struct and functions to solve Token captcha,
 //! like `ReCaptchaV2`, `ReCaptchaV3`, `FunCaptcha`, `GeeTest`, `Turnstile`.
+//! Token captcha - captcha solved by tokens.
 //!
 //! ## Examples
 //! ```no_run
