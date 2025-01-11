@@ -5,6 +5,7 @@ pub trait TaskTypeTrait {
     fn as_string(&self) -> String;
 }
 
+/// `ImageTaskType` stored image captcha types
 #[derive(Debug)]
 pub enum ImageTaskType {
     ImageToTextTask,
@@ -17,6 +18,8 @@ impl TaskTypeTrait for ImageTaskType {
     }
 }
 
+/// `TokenTaskType` stored token captcha types
+/// Token captcha - captcha solved by tokens
 #[derive(Debug)]
 pub enum TokenTaskType {
     RecaptchaV2Task,
@@ -46,6 +49,7 @@ impl TaskTypeTrait for TokenTaskType {
     }
 }
 
+/// `EnpPostfix` stored endpoints for service communication
 #[derive(Debug)]
 pub enum EnpPostfix {
     // tasks processing
@@ -70,11 +74,12 @@ impl fmt::Display for EnpPostfix {
     }
 }
 
+/// `GetResultStatus` stored available tasks status
 #[derive(Debug)]
 pub enum GetResultStatus {
-    processing,
-    ready,
-    error,
+    processing, // captcha still processing
+    ready,      // captcha ready
+    error,      // captcha solving failed
 }
 impl fmt::Display for GetResultStatus {
     /// `GetResultStatus` formatter
