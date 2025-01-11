@@ -5,6 +5,7 @@ use super::constants::BASE_REQUEST_URL;
 use super::enums::EnpPostfix;
 use super::structs::{CreateTaskRequest, ResultTaskRequest};
 
+/// Structure-interface to send different network requests
 pub struct RequestInterface {
     request_client: reqwest::Client,
 }
@@ -15,11 +16,14 @@ impl Default for RequestInterface {
 }
 
 impl RequestInterface {
+    /// New `RequestInterface` instance creation
     pub fn new() -> Self {
         RequestInterface {
             request_client: reqwest::Client::new(),
         }
     }
+
+    /// Function send GET request to URL and return response or string error
     pub async fn send_get_request(&self, url: &String) -> Result<Response, String> {
         let response = self.request_client.get(url).send().await.unwrap();
 
@@ -34,6 +38,8 @@ impl RequestInterface {
             ))
         }
     }
+
+    /// Function send POST request to URL and return response or string error
     pub async fn send_post_request(
         &self,
         payload: &Value,
@@ -52,6 +58,8 @@ impl RequestInterface {
             ))
         }
     }
+
+    /// Function send `createTask` request to URL and return JSON response or string error
     pub async fn send_create_task_request(
         &self,
         payload: &CreateTaskRequest,
@@ -78,6 +86,8 @@ impl RequestInterface {
             ))
         }
     }
+
+    /// Function send `getTaskResult ` request to URL and return JSON response or string error
     pub async fn send_get_result_request(
         &self,
         payload: &ResultTaskRequest,
