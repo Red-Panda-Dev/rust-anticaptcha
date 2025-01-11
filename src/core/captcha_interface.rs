@@ -7,6 +7,8 @@ use super::enums::{EnpPostfix, GetResultStatus, TaskTypeTrait};
 use super::request_interface::RequestInterface;
 use super::structs::{CreateTaskRequest, ResultTaskRequest};
 
+/// Structure-interface stored captcha-solving methods
+/// and main logic for captcha service communication
 pub struct CaptchaInterface {
     pub api_key: String, // service API key
 
@@ -19,6 +21,7 @@ pub struct CaptchaInterface {
     request_interface: RequestInterface,
 }
 impl CaptchaInterface {
+    /// New `CaptchaInterface` instance creation and setting API key value
     pub fn new(api_key: String) -> Self {
         CaptchaInterface {
             api_key,
