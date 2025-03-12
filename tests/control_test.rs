@@ -26,7 +26,7 @@ async fn success_get_app_stats() {
 
     let map = json!({
          "clientKey": captcha_args.API_KEY,
-         "softId": 1220,
+         "softId": 867,
          "mode": "money"
     });
 
